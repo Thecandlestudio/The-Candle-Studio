@@ -344,20 +344,24 @@
       justify-content:space-between;
       gap:12px;
     }
-    .select-btn{
-      padding:10px 12px;
-      border-radius:12px;
-      border:2px solid rgba(52,79,111,.75);
-      background:#fff;
-      color:#111827;
-      font-weight:900;
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      cursor:pointer;
-      min-width:140px;
-      -webkit-tap-highlight-color: transparent;
-    }
+  .select-btn{
+  padding:8px 10px;          /* smaller padding */
+  border-radius:12px;
+  border:2px solid rgba(52,79,111,.75);
+  background:#fff;
+  color:#111827;
+  font-weight:900;
+  font-size:11px;            /* smaller text */
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  cursor:pointer;
+
+  min-width:0;               /* IMPORTANT: removes forced width */
+  width:auto;                /* button sizes to its content */
+  flex:0 0 auto;             /* prevents stretching */
+  line-height:1.1;
+  white-space:nowrap;        /* keeps text on one line */
+}
     .select-btn:hover{background:rgba(246,203,204,.18)}
     .qty{
       width:64px;
