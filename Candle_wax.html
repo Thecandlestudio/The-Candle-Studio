@@ -81,11 +81,24 @@
       font-weight:800; color:var(--navy);
       min-width:0;
     }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:linear-gradient(135deg,var(--rose),var(--lav));
-      box-shadow:0 10px 22px rgba(151,73,90,.22);
+    .logo-wrap{
+      width:200px;
+      height:150px;
+      border-radius:16px;
+      background:0;
+      border:0;
+      box-shadow:0;
+      display:flex;
+      align-items:left;
+      justify-content:left;
       flex:0 0 auto;
+      overflow:hidden;
+    }
+    .logo-img{
+      width:200px;
+      height:150px;
+      object-fit:contain;
+      display:block;
     }
     .brand-text{min-width:0}
     .brand-title{
@@ -543,12 +556,12 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="brand-text">
-          <div class="brand-title">The Candle Studio</div>
-          <div class="brand-sub">Candle Making Supplies</div>
-        </div>
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="logo-wrap" aria-hidden="true">
+          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+        </span>
+      
+      </a>
       </div>
 
       <div class="nav-actions">
@@ -667,8 +680,7 @@
     <div class="container">
       <div class="foot">
         <div>
-          <div class="brand" style="margin-bottom:8px; color:#fff">
-            <span class="logo" aria-hidden="true"></span>
+          <div class="brand" style="margin-bottom:8px; color:#fff"></div>
             <span>
               <span style="display:block;font-weight:900;color:#fff">The Candle Studio</span>
               <small style="color:rgba(255,255,255,.75);font-weight:700">Candle Making Supplies</small>

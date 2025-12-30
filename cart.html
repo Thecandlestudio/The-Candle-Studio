@@ -56,25 +56,24 @@
       min-width:0;
     }
     .logo-wrap{
-      width:100%;
-      height:52px;
+      width:200px;
+      height:150px;
       border-radius:16px;
-      background:rgba(255,255,255,.75);
-      border:1px solid rgba(52,79,111,.18);
-      box-shadow:0 10px 22px rgba(52,79,111,.10);
+      background:0;
+      border:0;
+      box-shadow:0;
       display:flex;
-      align-items:center;
-      justify-content:center;
+      align-items:left;
+      justify-content:left;
+      flex:0 0 auto;
       overflow:hidden;
     }
     .logo-img{
-      width:100%;
-      height:100%;
+      width:200px;
+      height:150px;
       object-fit:contain;
       display:block;
-      padding:6px 10px;
     }
-
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .pill{
       padding:9px 12px;
@@ -406,11 +405,11 @@
 <body>
   <header>
     <div class="container nav">
-      <!-- ✅ Logo only -->
       <a class="brand" href="index.html" aria-label="Go to home">
         <span class="logo-wrap" aria-hidden="true">
           <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
         </span>
+      
       </a>
 
       <div class="nav-actions">
@@ -476,9 +475,6 @@
       <div class="foot">
         <div>
           <div style="max-width:520px;margin-bottom:8px;">
-            <div class="logo-wrap" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);box-shadow:none;">
-              <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
-            </div>
           </div>
           <p>
             The Candle Studio supplies high-quality candle-making materials for hobbyists, small businesses, and wholesalers alike.
