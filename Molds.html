@@ -1,0 +1,1478 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Candle Studio | Candle Molds</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --rose:#97495a;
+      --blush:#f6cbcc;
+      --navy:#344F6F;
+      --lav:#B0A0BA;
+
+      --bg:#fff8f9;
+      --card:#ffffff;
+      --text:#1c2230;
+      --muted:rgba(52,79,111,.78);
+      --line:rgba(52,79,111,.22);
+      --shadow:0 12px 30px rgba(52,79,111,.18);
+      --radius:18px;
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;} /* ✅ smooth scrolling */
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 16px}
+
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(246,203,204,.75);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; color:var(--navy);
+    }
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background:linear-gradient(135deg,var(--rose),var(--lav));
+      box-shadow:0 10px 22px rgba(151,73,90,.22);
+      flex:0 0 auto;
+    }
+    .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .pill{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.65);
+      color:var(--navy);
+      font-weight:700;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+    }
+    .pill:hover{background:rgba(255,255,255,.9)}
+    .cart-count{
+      display:inline-flex;
+      min-width:20px;
+      height:20px;
+      padding:0 6px;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background:rgba(151,73,90,.12);
+      border:1px solid rgba(151,73,90,.25);
+      color:var(--rose);
+      font-weight:900;
+      font-size:12px;
+      line-height:1;
+    }
+
+    .hero{
+      padding:52px 0 30px;
+      background:
+        linear-gradient(180deg, rgba(52,79,111,.55), rgba(246,203,204,.92)),
+        url("kik.png");
+      background-size:cover;
+      background-position:center;
+      border-bottom:1px solid var(--line);
+    }
+    .hero h1{
+      margin:0;
+      color:#fff;
+      font-size:46px;
+      line-height:1.05;
+      text-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    .hero p{
+      margin:12px 0 0;
+      color:rgba(255,255,255,.92);
+      max-width:70ch;
+      line-height:1.6;
+      font-weight:500;
+    }
+
+    section{padding:26px 0}
+    .section-title{
+      margin:0 0 10px;
+      font-size:22px;
+      color:var(--navy);
+    }
+    .lead{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:85ch;
+    }
+
+    /* ✅ Title row + controls (Sort + Search) */
+    .titlebar{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .control{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 12px;
+      background:rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      border-radius:14px;
+      box-shadow:0 10px 24px rgba(52,79,111,.08);
+      color:var(--navy);
+      font-weight:800;
+      min-width:260px;
+    }
+    .control small{
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:rgba(52,79,111,.8);
+      white-space:nowrap;
+    }
+    .control select, .control input{
+      width:100%;
+      border:0;
+      outline:0;
+      background:transparent;
+      color:var(--navy);
+      font-weight:800;
+      font-size:14px;
+      font-family:inherit;
+    }
+    .control input::placeholder{color:rgba(52,79,111,.55); font-weight:700;}
+
+    .resultline{
+      margin-top:8px;
+      color:rgba(52,79,111,.78);
+      font-weight:700;
+      font-size:13px;
+    }
+
+    /* =========================
+       CATEGORY CARDS (top)
+    ========================== */
+    .cat-grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .cat-card{
+      grid-column: span 4;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:transform .25s ease, box-shadow .25s ease;
+      display:block;
+    }
+    .cat-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 45px rgba(52,79,111,.20);
+    }
+    .cat-media{
+      height:170px;
+      background:
+        linear-gradient(135deg, rgba(151,73,90,.14), rgba(176,160,186,.18)),
+        repeating-linear-gradient(45deg, rgba(52,79,111,.08) 0 9px, rgba(52,79,111,.04) 9px 18px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden; /* ✅ ensure image cannot spill outside */
+    }
+
+    /* ✅ FIX: make category images truly fill the box */
+    .cat-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+
+      /* extra safety for weird inline gaps or flex sizing */
+      flex:0 0 auto;
+    }
+
+    .cat-badge{
+      position:absolute;
+      top:12px; left:12px;
+      background:rgba(246,203,204,.85);
+      color:var(--rose);
+      border:1px solid rgba(151,73,90,.25);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      font-weight:800;
+      backdrop-filter:blur(6px);
+      z-index:2;
+    }
+    .cat-placeholder{
+      text-align:center;
+      padding:0 12px;
+      color:rgba(52,79,111,.78);
+      font-size:13px;
+      line-height:1.45;
+      font-weight:700;
+    }
+    .cat-body{padding:14px 14px 16px; text-align:center;}
+    .cat-icon{font-size:38px; margin:2px 0 10px;}
+    .cat-name{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:900;
+      color:var(--navy);
+      letter-spacing:.2px;
+    }
+    .cat-desc{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+      font-weight:600;
+    }
+    .cat-cta{
+      margin-top:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(52,79,111,.25);
+      background:rgba(255,255,255,.75);
+      color:var(--navy);
+      font-weight:900;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .cat-card:hover .cat-cta{
+      background:rgba(246,203,204,.45);
+    }
+
+    /* =========================
+       PRODUCT GRID (items)
+    ========================== */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 4;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+
+    .img{
+      height:220px;
+      background:
+        linear-gradient(135deg, rgba(151,73,90,.10), rgba(176,160,186,.12)),
+        repeating-linear-gradient(45deg, rgba(52,79,111,.08) 0 10px, rgba(52,79,111,.04) 10px 20px);
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0;              /* ✅ remove padding so image can truly fill */
+      color:rgba(52,79,111,.82);
+      font-weight:800;
+      font-size:13px;
+      line-height:1.4;
+      overflow:hidden;        /* ✅ ensures image is clipped to box */
+    }
+
+    /* ✅ FIX: make product images fill the box */
+    .img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+
+      /* avoid tiny gaps & odd sizing */
+      flex:0 0 auto;
+    }
+
+    .content{padding:14px}
+    .name{
+      margin:0;
+      font-size:20px;
+      line-height:1.2;
+      color:var(--navy);
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .meta{
+      margin:8px 0 0;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .price{
+      font-size:16px;
+      font-weight:900;
+      color:rgba(52,79,111,.92);
+    }
+    .tag{
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(151,73,90,.25);
+      background:rgba(151,73,90,.10);
+      color:var(--rose);
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .size{
+      font-size:12px;
+      font-weight:800;
+      color:rgba(52,79,111,.8);
+      border:1px solid rgba(52,79,111,.18);
+      background:rgba(255,255,255,.7);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .btnrow{
+      padding:0 14px 16px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      width:max-content;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:12px;
+      border:2px solid rgba(52,79,111,.55);
+      background:#fff;
+      color:var(--navy);
+      font-weight:800;
+      letter-spacing:.02em;
+      font-size:13px;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .btn:hover{
+      background:rgba(247, 247, 247, 0.35);
+      border-color:rgba(52,79,111,.75);
+    }
+    .btn:disabled{opacity:.55; cursor:not-allowed;}
+
+    /* CART DRAWER */
+    .overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.35);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+      z-index:90;
+    }
+    .overlay.open{opacity:1; pointer-events:auto;}
+
+    .cart-drawer{
+      position:fixed;
+      top:0;
+      right:-420px;
+      width:min(420px, 92vw);
+      height:100vh;
+      background:rgba(255,255,255,.95);
+      border-left:1px solid var(--line);
+      box-shadow:-18px 0 40px rgba(52,79,111,.22);
+      z-index:100;
+      transition:right .25s ease;
+      display:flex;
+      flex-direction:column;
+      backdrop-filter: blur(10px);
+    }
+    .cart-drawer.open{ right:0; }
+
+    .cart-head{
+      padding:14px 14px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .cart-title{
+      margin:0;
+      font-size:16px;
+      font-weight:900;
+      color:var(--navy);
+      letter-spacing:.02em;
+    }
+    .close-btn{
+      border:1px solid var(--line);
+      background:rgba(246,203,204,.35);
+      color:var(--navy);
+      border-radius:999px;
+      padding:8px 10px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .close-btn:hover{background:rgba(246,203,204,.55)}
+
+    .cart-body{padding:12px 14px; overflow:auto; flex:1;}
+    .empty{
+      border:1px dashed rgba(52,79,111,.35);
+      border-radius:14px;
+      padding:14px;
+      color:var(--muted);
+      background:rgba(246,203,204,.18);
+      font-weight:700;
+    }
+    .cart-item{
+      display:grid;
+      grid-template-columns: 64px 1fr;
+      gap:10px;
+      padding:12px;
+      border:1px solid rgba(52,79,111,.18);
+      border-radius:16px;
+      background:rgba(246,203,204,.12);
+      margin-bottom:10px;
+    }
+    .thumb{
+      width:64px;height:64px;border-radius:14px;
+      background:#eee;
+      background-size:cover;
+      background-position:center;
+      border:1px solid rgba(52,79,111,.18);
+    }
+    .ci-top{display:flex; justify-content:space-between; gap:10px; align-items:flex-start;}
+    .ci-name{margin:0; font-weight:900; color:var(--navy); font-size:14px; line-height:1.2;}
+    .ci-price{font-weight:900; color:var(--rose); white-space:nowrap; font-size:14px;}
+    .ci-actions{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap;}
+    .qty{display:inline-flex; align-items:center; border:1px solid rgba(52,79,111,.25); border-radius:999px; overflow:hidden; background:#fff;}
+    .qty button{border:0; background:rgba(176,160,186,.22); color:var(--navy); font-weight:900; padding:8px 10px; cursor:pointer;}
+    .qty button:hover{background:rgba(176,160,186,.35)}
+    .qty span{min-width:34px; text-align:center; font-weight:900; color:var(--navy); padding:0 10px;}
+    .remove{border:0; background:transparent; color:rgba(52,79,111,.8); font-weight:900; cursor:pointer; text-decoration:underline;}
+    .remove:hover{color:var(--rose)}
+    .note{
+      margin:10px 0 0;
+      width:100%;
+      min-height:70px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(52,79,111,.25);
+      outline:none;
+      font-family:inherit;
+      background:rgba(255,255,255,.8);
+    }
+
+    .cart-foot{border-top:1px solid var(--line); padding:12px 14px 14px; background:rgba(176,160,186,.14);}
+    .row{display:flex; justify-content:space-between; align-items:center; gap:10px; margin:6px 0; color:var(--navy); font-weight:800;}
+    .row small{font-weight:700;color:rgba(52,79,111,.75)}
+    .total{font-size:16px; font-weight:900; color:var(--rose);}
+    .cart-buttons{display:grid; gap:10px; margin-top:10px;}
+    .wide{width:100%; justify-content:center;}
+    .checkout{
+      background:linear-gradient(135deg, rgba(151,73,90,.18), rgba(246,203,204,.75));
+      border-color:rgba(151,73,90,.35);
+      color:var(--rose);
+    }
+    .checkout:hover{background:linear-gradient(135deg, rgba(151,73,90,.25), rgba(246,203,204,.9));}
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(52,79,111,.14);
+      background:linear-gradient(180deg, rgba(52,79,111,.92), rgba(52,79,111,.98));
+      color:#fff;
+      padding:34px 0 26px;
+      margin-top:10px;
+    }
+    .foot{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr 1fr;
+      gap:18px;
+    }
+    .foot .brand{color:#fff}
+    .foot .brand small{color:rgba(255,255,255,.75)}
+    .foot p{margin:10px 0 0;color:rgba(255,255,255,.78);line-height:1.7;font-weight:600;font-family:'Poppins',sans-serif}
+    .foot h3{
+      margin:0 0 10px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:rgba(255,255,255,.92);
+      font-weight:900;
+      font-family:'Poppins',sans-serif;
+    }
+    .foot a{display:block;color:rgba(255,255,255,.78);padding:6px 0;font-weight:700;font-family:'Poppins',sans-serif}
+    .foot a:hover{color:#fff}
+    .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
+
+    @media (max-width: 900px){
+      .hero h1{font-size:36px}
+      .cat-card{grid-column: span 6;}
+      .card{grid-column: span 6;}
+      .control{min-width:240px}
+    }
+    @media (max-width: 520px){
+      .hero h1{font-size:32px}
+      .cat-card{grid-column: span 12;}
+      .card{grid-column: span 12;}
+      .img{height:200px}
+      .control{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="line-height:1.1">The Candle Studio</div>
+          <div style="font-size:12px;font-weight:700;color:rgba(52,79,111,.75)">Candle Making Supplies</div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <a class="pill" href="index.html">← Back to Home</a>
+
+        <button class="pill" id="openCartBtn" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
+          🛒 View Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="container">
+      <h1>The Candle Studio</h1>
+      <p>Browse candle molds by category. Use search + sorting, then click a category to jump to its items (all on one page).</p>
+    </div>
+  </div>
+
+  <!-- TOP: CATEGORY CARDS + SORT/SEARCH -->
+  <section>
+    <div class="container">
+      <div class="titlebar">
+        <div>
+          <h2 class="section-title" style="margin-bottom:6px;">Candle Molds</h2>
+          <p class="lead" style="margin:0;">Choose a category to jump to its items.</p>
+        </div>
+
+        <!-- ✅ Requested: Sorted by feature + Search (right side) -->
+        <div class="controls" aria-label="Sort and search controls">
+          <div class="control" title="Sort items">
+            <small>Sorted by feature</small>
+            <select id="sortSelect" aria-label="Sorted by feature">
+              <option value="feature" selected>Feature (default)</option>
+              <option value="title-az">Title (A → Z)</option>
+              <option value="title-za">Title (Z → A)</option>
+              <option value="price-low">Price (Low → High)</option>
+              <option value="price-high">Price (High → Low)</option>
+            </select>
+          </div>
+
+          <div class="control" title="Search items">
+            <small>Search</small>
+            <input id="searchInput" type="search" placeholder="Search molds (e.g., wave, rose, christmas)..." autocomplete="off" />
+          </div>
+        </div>
+      </div>
+
+      <div class="resultline" id="resultLine">Showing all items.</div>
+
+      <div class="cat-grid">
+        <a class="cat-card" href="#home-decor">
+          <div class="cat-media">
+         <img src="homedeco2.png" alt="Home Decor Molds"> 
+            <div class="cat-placeholder"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">🏠</div>
+            <h3 class="cat-name">Home Decor Molds</h3>
+            <p class="cat-desc">Modern shapes and statement pieces.</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+
+        <a class="cat-card" href="#animal-shaped">
+          <div class="cat-media">
+        <img src="animalss.png" alt="Animal shaped Molds"> 
+            <div class="cat-placeholder"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">🐾</div>
+            <h3 class="cat-name">Animal shaped Molds</h3>
+            <p class="cat-desc">Cute animal designs for gifts.</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+
+        <a class="cat-card" href="#flowers">
+          <div class="cat-media">
+            <img src="floral2.png" alt="Flower Molds"> 
+            <div class="cat-placeholder"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">🌸</div>
+            <h3 class="cat-name">Flower Molds</h3>
+            <p class="cat-desc">Floral shapes and bouquets.</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+
+        <a class="cat-card" href="#religious">
+          <div class="cat-media">
+       <img src="faithcross.png" alt="Religious Molds"> 
+            <div class="cat-placeholder"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">✝️</div>
+            <h3 class="cat-name">Religious Molds</h3>
+            <p class="cat-desc">Faith-inspired pieces.</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+
+        <a class="cat-card" href="#seasonal">
+          <div class="cat-media">
+        
+             <img src="seasonal.png" alt="Seasonal molds"> 
+            <div class="cat-placeholder"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">🎄</div>
+            <h3 class="cat-name">Seasonal molds</h3>
+            <p class="cat-desc">Holiday and seasonal themes.</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+
+        <a class="cat-card" href="#plexy">
+          <div class="cat-media">
+
+           <img src="pexy.png" alt="Plexy molds">
+            <div class="cat-placeholder"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">🧊</div>
+            <h3 class="cat-name">plexy molds</h3>
+            <p class="cat-desc">Clear acrylic-style molds.</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       HOME DECOR ITEMS
+  ======================== -->
+  <section id="home-decor" data-section="Home Decor Molds">
+    <div class="container">
+      <h2 class="section-title">Home Decor Molds</h2>
+      <p class="lead">All items below are on this page. Add images later by replacing the placeholder with an &lt;img&gt;.</p>
+
+      <div class="grid" data-grid="home-decor">
+        <!-- To add an image:
+          Replace <div class="img">Add item image</div> with:
+          <div class="img"><img src="YOURFILE.png" alt="Item name"></div>
+          and set data-img="YOURFILE.png" on the button if you want it in cart thumbs.
+        -->
+
+        <article class="card" data-name="Short Geometric Wave" data-price="5" data-soldout="false" data-section="Home Decor Molds">
+        <div class="img"><img src="shrtgeo.png" alt="Short Geometric Wave" ></div>
+          <div class="content"><h3 class="name">Short Geometric Wave</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="short-geometric-wave" data-name="Short Geometric Wave" data-price="5.00" data-img="shrtgeo.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Tall Geometric Wave" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+       <div class="img"><img src="tallgeo.png" alt="Tall Geometric Wave" ></div>
+          <div class="content"><h3 class="name">Tall Geometric Wave</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="tall-geometric-wave" data-name="Tall Geometric Wave" data-price="8.00" data-img="tallgeo.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Stripped Pear" data-price="9" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="strpr.png" alt="Stripped Pear" ></div>
+          <div class="content"><h3 class="name">Stripped Pear</h3><div class="meta"><div class="price">$9.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="stripped-pear" data-name="Stripped Pear" data-price="9.00" data-img="strpr.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Large Hourglass Pillar" data-price="10" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="lghrgls.png" alt="Large Hourglass Pillar" ></div>
+          <div class="content"><h3 class="name">Large Hourglass Pillar</h3><div class="meta"><div class="price">$10.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="large-hourglass-pillar" data-name="Large Hourglass Pillar" data-price="10.00" data-img="lghrgls.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Small Hourglass Pillar" data-price="7" data-soldout="false" data-section="Home Decor Molds">
+               <div class="img"><img src="smhrgls.png" alt="Small Hourglass Pillar" ></div>
+          <div class="content"><h3 class="name">Small Hourglass Pillar</h3><div class="meta"><div class="price">$7.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="small-hourglass-pillar" data-name="Small Hourglass Pillar" data-price="7.00" data-img="smhrgls.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Geometric Wave Cylinder" data-price="7" data-soldout="false" data-section="Home Decor Molds">
+                 <div class="img"><img src="geocarv.png" alt="Geometric Wave Cylinder" ></div>
+          <div class="content"><h3 class="name">Geometric Wave Cylinder</h3><div class="meta"><div class="price">$7.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="geometric-wave-cylinder" data-name="Geometric Wave Cylinder" data-price="7.00" data-img="geocarv.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Carved Wavy Short" data-price="6" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="carvwavyshrt.png" alt="Carved Wavy Short" ></div>
+          <div class="content"><h3 class="name">Carved Wavy Short</h3><div class="meta"><div class="price">$6.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="carved-wavy-short" data-name="Carved Wavy Short" data-price="6.00" data-img="carvwavyshrt.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Carved Wavy Tall" data-price="13" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="carvwavytall.png" alt="Carved Wavy Tall" ></div>
+          <div class="content"><h3 class="name">Carved Wavy Tall</h3><div class="meta"><div class="price">$13.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="carved-wavy-tall" data-name="Carved Wavy Tall" data-price="13.00" data-img="carvwavytall.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Geometric Column" data-price="9" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="geocul.png" alt="Geometric Column" ></div>
+          <div class="content"><h3 class="name">Geometric Column</h3><div class="meta"><div class="price">$9.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="geometric-column" data-name="Geometric Column" data-price="9.00" data-img="geocul.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Irregular Geometric Column" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="irrgeocul.png" alt="Irregular Geometric Column" ></div>
+          <div class="content"><h3 class="name">Irregular Geometric Column</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="irregular-geometric-column" data-name="Irregular Geometric Column" data-price="8.00" data-img="irrgeocul.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Geometric Stripped Orb Wide" data-price="9" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="Geometric Stripped Orb Wide.png" alt="Geometric Stripped Orb Wide" ></div>
+          <div class="content"><h3 class="name">Geometric Stripped Orb Wide</h3><div class="meta"><div class="price">$9.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="geometric-stripped-orb-wide" data-name="Geometric Stripped Orb Wide" data-price="9.00" data-img="Geometric Stripped Orb Wide.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Geometric Stripped Orb" data-price="9" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="geostrp.png" alt="Geometric Stripped Orb" ></div>
+          <div class="content"><h3 class="name">Geometric Stripped Orb</h3><div class="meta"><div class="price">$9.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="geometric-stripped-orb" data-name="Geometric Stripped Orb" data-price="9.00" data-img="geostrp.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Taper Long Candle with Daisy/Tulip" data-price="9" data-soldout="false" data-section="Home Decor Molds">
+                 <div class="img"><img src="Taper Long Candle.png" alt="Taper Long Candle" ></div>
+          <div class="content"><h3 class="name">Taper Long Candle with Daisy/Tulip</h3><div class="meta"><div class="price">$9.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="taper-long-daisy-tulip" data-name="Taper Long Candle with Daisy/Tulip" data-price="9.00" data-img="Taper Long Candle.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Big Rainbow Arch" data-price="8" data-soldout="true" data-section="Home Decor Molds">
+            <div class="img"><img src="bigrainbowarc.png" alt="bigrainbowarc" ></div>
+          <div class="content"><h3 class="name">Big Rainbow Arch</h3><div class="meta"><div class="price">$8.00</div><span class="tag">Sold out</span></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" disabled data-id="big-rainbow-arch" data-name="Big Rainbow Arch" data-price="8.00" data-img="bigrainbowarc.png">Sold out</button></div>
+        </article>
+
+        <article class="card" data-name="Small Rainbow Arch" data-price="6" data-soldout="false" data-section="Home Decor Molds">
+     <div class="img"><img src="smallarc.png" alt="Small Rainbow Arch" ></div>
+          <div class="content"><h3 class="name">Small Rainbow Arch</h3><div class="meta"><div class="price">$6.00</div><span class="size">9×3.3×13.3</span></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="small-rainbow-arch" data-name="Small Rainbow Arch" data-price="6.00" data-img="smallarc.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="15 cavity Bubble Candle Mold" data-price="7" data-soldout="false" data-section="Home Decor Molds">
+     <div class="img"><img src="15bub.png" alt="15 cavity Bubble Candle Mold" ></div>
+          <div class="content"><h3 class="name">15 cavity Bubble Candle Mold</h3><div class="meta"><div class="price">$7.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="15-cavity-bubble" data-name="15 cavity Bubble Candle Mold" data-price="7.00" data-img="15bub.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Mini YSL Logo" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+     <div class="img"><img src="ysl.png" alt="Mini YSL Logo" ></div>
+          <div class="content"><h3 class="name">Mini YSL Logo</h3><div class="meta"><div class="price">$8.00</div><span class="size">3.6×7.1×4</span></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="mini-ysl-logo" data-name="Mini YSL Logo" data-price="8.00" data-img="ysl.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="6 Cavity Bubble Candle Mold" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+     <div class="img"><img src="6bubble.png" alt="6 Cavity Bubble Candle Mold" ></div>
+          <div class="content"><h3 class="name">6 Cavity Bubble Candle Mold</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="6-cavity-bubble" data-name="6 Cavity Bubble Candle Mold" data-price="8.00" data-img="6bubble.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Mini Flowers" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+     <div class="img"><img src="miniflw.png" alt="Mini Flowers" ></div>
+          <div class="content"><h3 class="name">Mini Flowers</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="mini-flowers" data-name="Mini Flowers" data-price="8.00" data-img="miniflw.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Cactus" data-price="3" data-soldout="false" data-section="Home Decor Molds">
+     <div class="img"><img src="cactus.png" alt="cactus" ></div>
+          <div class="content"><h3 class="name">Cactus</h3><div class="meta"><div class="price">$3.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="cactus" data-name="Cactus" data-price="3.00" data-img="cactus.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Snowflake" data-price="5" data-soldout="false" data-section="Home Decor Molds">
+              <div class="img"><img src="pinkstar.png" alt="Snowflake" ></div>
+          <div class="content"><h3 class="name">Snowflake</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="snowflake" data-name="Snowflake" data-price="5.00" data-img="pinkstar.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Star Mold" data-price="5" data-soldout="false" data-section="Home Decor Molds">
+         <div class="img"><img src="redstar.png" alt="Star Mold" ></div>
+          <div class="content"><h3 class="name">Star Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="star-mold" data-name="Star Mold" data-price="5.00" data-img="redstar.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Succulent" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+        <div class="img"><img src="susc.png" alt="Succulent" ></div>
+          <div class="content"><h3 class="name">Succulent</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="succulent" data-name="Succulent" data-price="8.00" data-img="susc.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Sea shell Mold" data-price="10" data-soldout="true" data-section="Home Decor Molds">
+           <div class="img"><img src="seashell.png" alt="Sea shell Mold" ></div>
+          <div class="content"><h3 class="name">Sea shell Mold</h3><div class="meta"><div class="price">$10.00</div><span class="tag">Sold out</span></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" disabled data-id="sea-shell-mold" data-name="Sea shell Mold" data-price="10.00" data-img="seashell.png">Sold out</button></div>
+        </article>
+
+        <article class="card" data-name="Flower Bouquet" data-price="7" data-soldout="false" data-section="Home Decor Molds">
+        <div class="img"><img src="flowers.png" alt="Flower bouquets" ></div>
+          <div class="content"><h3 class="name">Flower Bouquet</h3><div class="meta"><div class="price">$7.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="flower-bouquet" data-name="Flower Bouquet" data-price="7.00" data-img="flowers.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Carousel Mold" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+                  <div class="img"><img src="caru.png" alt="Carousel Mold" ></div>
+          <div class="content"><h3 class="name">Carousel Mold</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="carousel-mold" data-name="Carousel Mold" data-price="8.00" data-img="caru.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Blindfolded Lady" data-price="6" data-soldout="true" data-section="Home Decor Molds">
+                       <div class="img"><img src="blndldy.png" alt="Blindfolded Lady" ></div>
+          <div class="content"><h3 class="name">Blindfolded Lady</h3><div class="meta"><div class="price">$6.00</div><span class="tag">Sold out</span></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" disabled data-id="blindfolded-lady" data-name="Blindfolded Lady" data-price="6.00" data-img="blndldy.png">Sold out</button></div>
+        </article>
+
+        <article class="card" data-name="Butterfly Mold" data-price="4" data-soldout="true" data-section="Home Decor Molds">
+                      <div class="img"><img src="butt.png" alt="Butterfly" ></div>
+          <div class="content"><h3 class="name">Butterfly Mold</h3><div class="meta"><div class="price">$4.00</div><span class="tag">Sold out</span></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" disabled data-id="butterfly-mold" data-name="Butterfly Mold" data-price="4.00" data-img="butt.png">Sold out</button></div>
+        </article>
+
+        <article class="card" data-name="Geometric Star" data-price="8" data-soldout="false" data-section="Home Decor Molds">
+               <div class="img"><img src="geostar.png" alt="Geometric Star" ></div>
+          <div class="content"><h3 class="name">Geometric Star</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="geometric-star" data-name="Geometric Star" data-price="8.00" data-img="geostar.png">Add to cart</button></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       ANIMAL SHAPED ITEMS
+  ======================== -->
+  <section id="animal-shaped" data-section="Animal shaped Molds">
+    <div class="container">
+      <h2 class="section-title">Animal shaped Molds</h2>
+      <p class="lead">Adorable animals for cute candles.</p>
+
+      <div class="grid" data-grid="animal-shaped">
+        <article class="card" data-name="Giraffe Mold" data-price="5" data-soldout="false" data-section="Animal shaped Molds">
+              <div class="img"><img src="jir.png" alt="Giraffe Mold" ></div>
+          <div class="content"><h3 class="name">Giraffe Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="giraffe-mold" data-name="Giraffe Mold" data-price="5.00" data-img="jir.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Cats Mold" data-price="7" data-soldout="false" data-section="Animal shaped Molds">
+     <div class="img"><img src="cat.png" alt="Cats Mold" ></div>
+          <div class="content"><h3 class="name">Cats Mold</h3><div class="meta"><div class="price">$7.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="cats-mold" data-name="Cats Mold" data-price="7.00" data-img="cat.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Elephant Mold" data-price="5" data-soldout="false" data-section="Animal shaped Molds">
+             <div class="img"><img src="eleph.png" alt="Elephant Mold" ></div>
+          <div class="content"><h3 class="name">Elephant Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="elephant-mold" data-name="Elephant Mold" data-price="5.00" data-img="eleph.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Small Bear Mold" data-price="13" data-soldout="false" data-section="Animal shaped Molds">
+        <div class="img"><img src="smallteddy.png" alt="Small Bear Mold" ></div>
+            <div class="content"><h3 class="name">Small Bear Mold</h3><div class="meta"><div class="price">$13.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="small-bear-mold" data-name="Small Bear Mold" data-price="13.00" data-img="smallteddy.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Dinosaur Mold" data-price="5" data-soldout="false" data-section="Animal shaped Molds">
+              <div class="img"><img src="dino.png" alt="Dinosaur Mold" ></div>
+          <div class="content"><h3 class="name">Dinosaur Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="dinosaur-mold" data-name="Dinosaur Mold" data-price="5.00" data-img="dino.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Teddy Bear Mold" data-price="5" data-soldout="false" data-section="Animal shaped Molds">
+         <div class="img"><img src="teddy.png" alt="Teddy Bear Mold" ></div>
+          <div class="content"><h3 class="name">Teddy Bear Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="teddy-bear-mold" data-name="Teddy Bear Mold" data-price="5.00" data-img="teddy.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       FLOWER ITEMS
+  ======================== -->
+  <section id="flowers" data-section="Flower Molds">
+    <div class="container">
+      <h2 class="section-title">Flower Molds</h2>
+      <p class="lead">Floral molds for delicate designs.</p>
+
+      <div class="grid" data-grid="flowers">
+        <article class="card" data-name="Daisy Mold" data-price="3.5" data-soldout="false" data-section="Flower Molds">
+         <div class="img"><img src="blueflow.png" alt="Daisy Moldr" ></div>
+          <div class="content"><h3 class="name">Daisy Mold</h3><div class="meta"><div class="price">$3.50</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="daisy-mold" data-name="Daisy Mold" data-price="3.50" data-img="blueflow.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Sunflower Mold" data-price="5" data-soldout="false" data-section="Flower Molds">
+           <div class="img"><img src="sunflow.png" alt="Sunflower Mold" ></div>
+          <div class="content"><h3 class="name">Sunflower Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="sunflower-mold" data-name="Sunflower Mold" data-price="5.00" data-img="sunflow.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Lotus Mold" data-price="6" data-soldout="false" data-section="Flower Molds">
+              <div class="img"><img src="lotus.png" alt="Lotus Mold" ></div>
+          <div class="content"><h3 class="name">Lotus Mold</h3><div class="meta"><div class="price">$6.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="lotus-mold" data-name="Lotus Mold" data-price="6.00" data-img="lotus.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Flower Refresher" data-price="6" data-soldout="false" data-section="Flower Molds">
+             <div class="img"><img src="flwref.png" alt="Flower Refresher" ></div>
+          <div class="content"><h3 class="name">Flower Refresher</h3><div class="meta"><div class="price">$6.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="flower-refresher" data-name="Flower Refresher" data-price="6.00" data-img="flwref.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Peony Mold" data-price="3.5" data-soldout="false" data-section="Flower Molds">
+              <div class="img"><img src="peony.png" alt="Peony Mold" ></div>
+          <div class="content"><h3 class="name">Peony Mold</h3><div class="meta"><div class="price">$3.50</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="peony-mold" data-name="Peony Mold" data-price="3.50" data-img="peony.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Large Rose" data-price="5" data-soldout="false" data-section="Flower Molds">
+             <div class="img"><img src="bgflwr.png" alt="Large Rose" ></div>
+          <div class="content"><h3 class="name">Large Rose</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="large-rose" data-name="Large Rose" data-price="5.00" data-img="bgflwr.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Small Rose" data-price="4" data-soldout="false" data-section="Flower Molds">
+              <div class="img"><img src="smflwr.png" alt="Small Rose" ></div>
+          <div class="content"><h3 class="name">Small Rose</h3><div class="meta"><div class="price">$4.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="small-rose" data-name="Small Rose" data-price="4.00" data-img="smflwr.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       RELIGIOUS ITEMS
+  ======================== -->
+  <section id="religious" data-section="Religious Molds">
+    <div class="container">
+      <h2 class="section-title">Religious Molds</h2>
+      <p class="lead">Faith-inspired molds for meaningful pieces.</p>
+
+      <div class="grid" data-grid="religious">
+        <article class="card" data-name="Small cross “Faith” Mold" data-price="5" data-soldout="false" data-section="Religious Molds">
+              <div class="img"><img src="cross2.png" alt="Small cross “Faith” Mold" ></div>
+          <div class="content"><h3 class="name">Small cross “Faith” Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="small-cross-faith" data-name="Small cross “Faith” Mold" data-price="5.00" data-img="cross2.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Large Cross “Blessed” Mold" data-price="5" data-soldout="false" data-section="Religious Molds">
+             <div class="img"><img src="cross.png" alt="Geometric Star" ></div>
+          <div class="content"><h3 class="name">Large Cross “Blessed” Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="large-cross-blessed" data-name="Large Cross “Blessed” Mold" data-price="5.00" data-img="cross.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       SEASONAL ITEMS
+  ======================== -->
+  <section id="seasonal" data-section="Seasonal molds">
+    <div class="container">
+      <h2 class="section-title">Seasonal molds</h2>
+      <p class="lead">Holiday and seasonal themes.</p>
+
+      <div class="grid" data-grid="seasonal">
+        <article class="card" data-name="3D Christmas Mold" data-price="5" data-soldout="false" data-section="Seasonal molds">
+        <div class="img"><img src="chrisball.png" alt="3D Christmas Mold" ></div>
+          <div class="content"><h3 class="name">3D Christmas Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="3d-christmas-mold" data-name="3D Christmas Mold" data-price="5.00" data-img="chrisball.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="2D Christmas Tree Mold" data-price="4" data-soldout="false" data-section="Seasonal molds">
+             <div class="img"><img src="christree.png" alt="2D Christmas Tree Mold" ></div>
+          <div class="content"><h3 class="name">2D Christmas Tree Mold</h3><div class="meta"><div class="price">$4.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="2d-christmas-tree" data-name="2D Christmas Tree Mold" data-price="4.00" data-img="christree.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Christmas Tree Mold" data-price="4" data-soldout="true" data-section="Seasonal molds">
+              <div class="img"><img src="bgchrstree.png" alt="Christmas Tree Mold" ></div>
+          <div class="content"><h3 class="name">Christmas Tree Mold</h3><div class="meta"><div class="price">$4.00</div><span class="tag">Sold out</span></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" disabled data-id="christmas-tree-mold" data-name="Christmas Tree Mold" data-price="4.00" data-img="bgchrstree.png">Sold out</button></div>
+        </article>
+
+        <article class="card" data-name="Gingerbread Man" data-price="4" data-soldout="false" data-section="Seasonal molds">
+           <div class="img"><img src="Ginger.png" alt="Gingerbread Man" ></div>
+          <div class="content"><h3 class="name">Gingerbread Man</h3><div class="meta"><div class="price">$4.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="gingerbread-man" data-name="Gingerbread Man" data-price="4.00" data-img="Ginger.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Ghost Mold" data-price="6" data-soldout="false" data-section="Seasonal molds">
+              <div class="img"><img src="Ghost.png" alt="Ghost Mold" ></div>
+          <div class="content"><h3 class="name">Ghost Mold</h3><div class="meta"><div class="price">$6.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="ghost-mold" data-name="Ghost Mold" data-price="6.00" data-img="ghost.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Santa Mold" data-price="6.5" data-soldout="false" data-section="Seasonal molds">
+              <div class="img"><img src="Santa.png" alt="Santa Mold" ></div>
+          <div class="content"><h3 class="name">Santa Mold</h3><div class="meta"><div class="price">$6.50</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="santa-mold" data-name="Santa Mold" data-price="6.50" data-img="Santa.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       PLEXY ITEMS
+  ======================== -->
+  <section id="plexy" data-section="plexy molds">
+    <div class="container">
+      <h2 class="section-title">plexy molds</h2>
+      <p class="lead">Clear acrylic-style molds for sharp edges and modern looks.</p>
+
+      <div class="grid" data-grid="plexy">
+        <article class="card" data-name="Coarse rack apex small" data-price="12" data-soldout="false" data-section="plexy molds">
+           <div class="img"><img src="Coarsesm.png" alt="Coarse rack apex small" ></div>
+          <div class="content"><h3 class="name">Coarse rack apex small</h3><div class="meta"><div class="price">$12.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="coarse-rack-apex-small" data-name="Coarse rack apex small" data-price="12.00" data-img="Coarsesm.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Stripped Cylinder Mold" data-price="10" data-soldout="false" data-section="plexy molds">
+              <div class="img"><img src="StrCy.png" alt="Stripped Cylinder Mold" ></div>
+          <div class="content"><h3 class="name">Stripped Cylinder Mold</h3><div class="meta"><div class="price">$10.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="stripped-cylinder-mold" data-name="Stripped Cylinder Mold" data-price="10.00" data-img="StrCy.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Coarse rack apex big" data-price="16" data-soldout="false" data-section="plexy molds">
+         <div class="img"><img src="Coarsebg.png" alt="Coarse rack apex bi" ></div>
+          <div class="content"><h3 class="name">Coarse rack apex big</h3><div class="meta"><div class="price">$16.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="coarse-rack-apex-big" data-name="Coarse rack apex big" data-price="16.00" data-img="Coarsebg.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Stripped Tall Mold" data-price="9" data-soldout="false" data-section="plexy molds">
+             <div class="img"><img src="Strtall.png" alt="Stripped Tall Mold" ></div>
+          <div class="content"><h3 class="name">Stripped Tall Mold</h3><div class="meta"><div class="price">$9.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="stripped-tall-mold" data-name="Stripped Tall Mold" data-price="9.00" data-img="Strtall.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Clear plastic tapered candlesticks" data-price="7" data-soldout="false" data-section="plexy molds">
+             <div class="img"><img src="Clrplast.png" alt="Clear plastic tapered candlesticks" ></div>
+          <div class="content"><h3 class="name">Clear plastic tapered candlesticks</h3><div class="meta"><div class="price">$7.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="clear-plastic-tapered-candlesticks" data-name="Clear plastic tapered candlesticks" data-price="7.00" data-img="Clrplast.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div class="brand" style="margin-bottom:8px">
+            <span class="logo" aria-hidden="true"></span>
+            <span>
+              <span style="display:block;font-size:15px;line-height:1.1;font-family:var(--serif);font-weight:700;">
+                The Candle Studio
+              </span>
+              <small>Candle Making Supplies</small>
+            </span>
+          </div>
+          <p>
+            The Candle Studio supplies high-quality candle-making materials for hobbyists, small businesses, and wholesalers alike.
+            From waxes to fragrance oils, we provide everything you need to create exceptional candles.
+          </p>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <a href="About.html">About</a>
+          <a href="Contact_us.html">Contact Us</a>
+          <a href="index.html">Home</a>
+        </div>
+
+        <div>
+          <h3>Site Links</h3>
+          <a href="Candle_wax.html">Candle Wax</a>
+          <a href="Molds.html">Candle Molds</a>
+          <a href="Fragrance_Oils.html">Fragrance Oils</a>
+          <a href="Jesmonite.html">Jesmonite</a>
+          <a href="Jars.html">Jars & Containers</a>
+        </div>
+      </div>
+
+      <div class="copy">Copyright © <span id="year"></span> | The Candle Studio</div>
+    </div>
+  </footer>
+
+  <!-- CART overlay + drawer -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
+    <div class="cart-head">
+      <h3 class="cart-title">Your Cart</h3>
+      <button class="close-btn" id="closeCartBtn" type="button" aria-label="Close cart">✕</button>
+    </div>
+
+    <div class="cart-body">
+      <div class="empty" id="emptyState">
+        Your cart is empty. Click “Add to cart” on a product to start shopping.
+      </div>
+
+      <div id="cartItems"></div>
+
+      <label style="display:block;margin-top:14px;font-weight:900;color:var(--navy);font-size:13px;letter-spacing:.06em;text-transform:uppercase">
+        Order note (optional)
+      </label>
+      <textarea class="note" id="orderNote" placeholder="Write a note about your order (e.g., gift wrap, preferred pickup time)"></textarea>
+    </div>
+
+    <div class="cart-foot">
+      <div class="row"><small>Items</small> <span id="itemsCount">0</span></div>
+      <div class="row"><small>Subtotal</small> <span class="total" id="subtotal">$0.00</span></div>
+
+      <div class="cart-buttons">
+        <button class="btn wide" id="clearCartBtn" type="button">Clear cart</button>
+        <button class="btn wide checkout" id="checkoutBtn" type="button">Checkout</button>
+      </div>
+
+      <div style="margin-top:10px;color:rgba(52,79,111,.75);font-size:12px;line-height:1.5">
+        *This is a simple demo cart stored in your browser (localStorage). For real payments, you’ll need Shopify/WooCommerce or a backend checkout.
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // -----------------------
+    // Simple Cart (localStorage)
+    // -----------------------
+    const CART_KEY = "tcs_cart_v1";
+    let cart = [];
+
+    const $ = (sel) => document.querySelector(sel);
+
+    const cartCountEl = $("#cartCount");
+    const itemsCountEl = $("#itemsCount");
+    const subtotalEl = $("#subtotal");
+    const cartItemsEl = $("#cartItems");
+    const emptyStateEl = $("#emptyState");
+
+    const overlay = $("#overlay");
+    const drawer = $("#cartDrawer");
+    const openCartBtn = $("#openCartBtn");
+    const closeCartBtn = $("#closeCartBtn");
+    const clearCartBtn = $("#clearCartBtn");
+    const checkoutBtn = $("#checkoutBtn");
+
+    function loadCart(){
+      try{
+        const raw = localStorage.getItem(CART_KEY);
+        cart = raw ? JSON.parse(raw) : [];
+        if(!Array.isArray(cart)) cart = [];
+      }catch{
+        cart = [];
+      }
+    }
+
+    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function money(n){ return "$" + Number(n).toFixed(2); }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function totals(){
+      const items = cart.reduce((sum, it) => sum + it.qty, 0);
+      const subtotal = cart.reduce((sum, it) => sum + (it.qty * it.price), 0);
+      cartCountEl.textContent = String(items);
+      itemsCountEl.textContent = String(items);
+      subtotalEl.textContent = money(subtotal);
+      emptyStateEl.style.display = cart.length ? "none" : "block";
+    }
+
+    function renderCart(){
+      cartItemsEl.innerHTML = "";
+
+      cart.forEach((it) => {
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.dataset.id = it.id;
+
+        row.innerHTML = `
+          <div class="thumb" style="background-image:url('${String(it.img||"").replace(/'/g, "\\'")}')"></div>
+          <div>
+            <div class="ci-top">
+              <p class="ci-name">${escapeHtml(it.name)}</p>
+              <div class="ci-price">${money(it.price)}</div>
+            </div>
+
+            <div class="ci-actions">
+              <div class="qty" aria-label="Quantity controls">
+                <button type="button" data-action="dec" aria-label="Decrease quantity">−</button>
+                <span>${it.qty}</span>
+                <button type="button" data-action="inc" aria-label="Increase quantity">+</button>
+              </div>
+
+              <button class="remove" type="button" data-action="remove">Remove</button>
+            </div>
+          </div>
+        `;
+        cartItemsEl.appendChild(row);
+      });
+
+      totals();
+    }
+
+    function openCart(){
+      overlay.classList.add("open");
+      drawer.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      setTimeout(() => closeCartBtn.focus(), 50);
+    }
+
+    function closeCart(){
+      overlay.classList.remove("open");
+      drawer.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      openCartBtn.focus();
+    }
+
+    function addItem({id,name,price,img}){
+      const found = cart.find(x => x.id === id);
+      if(found) found.qty += 1;
+      else cart.push({id, name, price: Number(price), img, qty: 1});
+      saveCart();
+      renderCart();
+    }
+
+    function setQty(id, qty){
+      const it = cart.find(x => x.id === id);
+      if(!it) return;
+      it.qty = Math.max(1, qty);
+      saveCart();
+      renderCart();
+    }
+
+    function removeItem(id){
+      cart = cart.filter(x => x.id !== id);
+      saveCart();
+      renderCart();
+    }
+
+    function clearCart(){
+      cart = [];
+      saveCart();
+      renderCart();
+    }
+
+    openCartBtn?.addEventListener("click", openCart);
+    closeCartBtn?.addEventListener("click", closeCart);
+    overlay?.addEventListener("click", closeCart);
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && drawer.classList.contains("open")) closeCart();
+    });
+
+    document.querySelectorAll(".add-to-cart").forEach(btn => {
+      btn.addEventListener("click", () => {
+        addItem({
+          id: btn.dataset.id,
+          name: btn.dataset.name,
+          price: btn.dataset.price,
+          img: btn.dataset.img
+        });
+        openCart();
+      });
+    });
+
+    cartItemsEl.addEventListener("click", (e) => {
+      const itemEl = e.target.closest(".cart-item");
+      if(!itemEl) return;
+      const id = itemEl.dataset.id;
+
+      const actionBtn = e.target.closest("button");
+      if(!actionBtn) return;
+
+      const action = actionBtn.dataset.action;
+      const it = cart.find(x => x.id === id);
+      if(!it) return;
+
+      if(action === "inc") setQty(id, it.qty + 1);
+      if(action === "dec") setQty(id, it.qty - 1);
+      if(action === "remove") removeItem(id);
+    });
+
+    clearCartBtn?.addEventListener("click", () => {
+      if(confirm("Clear all items from your cart?")) clearCart();
+    });
+
+    checkoutBtn?.addEventListener("click", () => {
+      if (!cart.length) {
+        alert("Your cart is empty.");
+        return;
+      }
+      const note = document.getElementById("orderNote").value.trim();
+      localStorage.setItem("tcs_order_note", note);
+      window.location.href = "cart.html";
+    });
+
+    // -----------------------
+    // ✅ SEARCH + SORT (page items)
+    // -----------------------
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const resultLine = document.getElementById("resultLine");
+
+    // Store original order per section so "Feature (default)" can restore it
+    const sections = Array.from(document.querySelectorAll("section[data-section]"));
+    const originals = new Map(); // gridEl -> [cards...]
+
+    sections.forEach(sec => {
+      const grid = sec.querySelector(".grid");
+      if(!grid) return;
+      const cards = Array.from(grid.querySelectorAll(".card"));
+      originals.set(grid, cards);
+    });
+
+    function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+    function compareTitle(a,b,dir=1){
+      const A = a.dataset.name || "";
+      const B = b.dataset.name || "";
+      return A.localeCompare(B) * dir;
+    }
+    function comparePrice(a,b,dir=1){
+      const A = Number(a.dataset.price || 0);
+      const B = Number(b.dataset.price || 0);
+      return (A - B) * dir;
+    }
+    function compareSoldout(a,b,availableFirst=true){
+      const A = (a.dataset.soldout === "true");
+      const B = (b.dataset.soldout === "true");
+      // availableFirst: false means soldout first
+      if(A === B) return 0;
+      if(availableFirst) return A ? 1 : -1; // soldout goes down
+      return A ? -1 : 1; // soldout goes up
+    }
+
+    function applySearchAndSort(){
+      const q = normalize(searchInput?.value);
+      const sortMode = sortSelect?.value || "feature";
+
+      let totalVisible = 0;
+      let totalAll = 0;
+
+      sections.forEach(sec => {
+        const grid = sec.querySelector(".grid");
+        if(!grid) return;
+
+        // restore original order if feature
+        if(sortMode === "feature"){
+          const originalCards = originals.get(grid) || [];
+          originalCards.forEach(card => grid.appendChild(card));
+        }
+
+        const cards = Array.from(grid.querySelectorAll(".card"));
+        totalAll += cards.length;
+
+        // FILTER
+        cards.forEach(card => {
+          const name = normalize(card.dataset.name);
+          const sectionName = normalize(card.dataset.section);
+          const isSoldout = (card.dataset.soldout === "true");
+          const haystack = `${name} ${sectionName} ${isSoldout ? "sold out" : "available"}`;
+          const show = !q || haystack.includes(q);
+          card.style.display = show ? "" : "none";
+          if(show) totalVisible += 1;
+        });
+
+        // SORT (only visible cards)
+        if(sortMode !== "feature"){
+          const visibleCards = cards.filter(c => c.style.display !== "none");
+          let sorted = [...visibleCards];
+
+          if(sortMode === "title-az") sorted.sort((a,b) => compareTitle(a,b, 1));
+          if(sortMode === "title-za") sorted.sort((a,b) => compareTitle(a,b,-1));
+          if(sortMode === "price-low") sorted.sort((a,b) => comparePrice(a,b, 1));
+          if(sortMode === "price-high") sorted.sort((a,b) => comparePrice(a,b,-1));
+          if(sortMode === "available-first") sorted.sort((a,b) => compareSoldout(a,b,true) || compareTitle(a,b,1));
+          if(sortMode === "soldout-first") sorted.sort((a,b) => compareSoldout(a,b,false) || compareTitle(a,b,1));
+
+          // Re-append sorted visible cards (keeps hidden ones in DOM but not shown)
+          sorted.forEach(card => grid.appendChild(card));
+        }
+
+        // If a section has zero visible items, optionally collapse it:
+        const anyVisible = Array.from(grid.querySelectorAll(".card")).some(c => c.style.display !== "none");
+        sec.style.display = anyVisible ? "" : "none";
+      });
+
+      if(!q){
+        resultLine.textContent = "Showing all items.";
+      }else{
+        resultLine.textContent = `Showing ${totalVisible} matching item${totalVisible===1?"":"s"} (out of ${totalAll}).`;
+      }
+    }
+
+    searchInput?.addEventListener("input", applySearchAndSort);
+    sortSelect?.addEventListener("change", applySearchAndSort);
+
+    // Init
+    loadCart();
+    renderCart();
+    applySearchAndSort();
+  </script>
+</body>
+</html>

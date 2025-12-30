@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Candle Studio | Home</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* KEEP your palette */
+      --rose:#97495a;
+      --blush:#f6cbcc;
+      --navy:#344F6F;
+      --lav:#B0A0BA;
+
+      /* neutrals */
+      --bg:#fff8f9;
+      --card:#ffffff;
+      --text:#1c2230;
+      --muted:rgba(52,79,111,.78);
+      --line:rgba(52,79,111,.22);
+      --shadow:0 14px 40px rgba(52,79,111,.14);
+      --radius:18px;
+      --max:1120px;
+
+      --btnShadow: 0 12px 26px rgba(52,79,111,.18);
+
+      /* ✅ serif font used in the About page */
+      --serif: Georgia, "Times New Roman", serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 16px}
+
+    /* ✅ make headings serif */
+    h1, h2, h3, .section-title, .prod-name{
+      font-family: var(--serif);
+      letter-spacing:.02em;
+    }
+
+    /* ---------- HEADER / NAV  ---------- */
+    header{
+      position:sticky; top:0; z-index:60;
+      background:rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(52,79,111,.14);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+
+    /* ✅ UPDATED brand layout (logo + text) */
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:800; color:var(--navy);
+      letter-spacing:.2px;
+      min-width:220px;
+    }
+
+    /* ✅ modern logo container */
+    .logo-wrap{
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      background:rgba(255,255,255,.9);
+      border:1px solid rgba(52,79,111,.14);
+      box-shadow:0 10px 22px rgba(52,79,111,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      overflow:hidden;
+    }
+    .logo-img{
+      width:34px;
+      height:34px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .brand-title{
+      display:block;
+      line-height:1.05;
+      font-size:15px;
+      font-weight:900;
+      font-family:var(--serif);
+    }
+    .brand small{
+      display:block;
+      font-size:12px;
+      font-weight:700;
+      color:rgba(52,79,111,.7);
+      margin-top:3px;
+      font-family:'Poppins',sans-serif;
+    }
+
+    .nav-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .menu-btn{
+      display:none;
+      border:1px solid rgba(52,79,111,.18);
+      background:#fff;
+      color:var(--navy);
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:800;
+      font-family:'Poppins',sans-serif;
+    }
+    .menu-btn:hover{background:rgba(246,203,204,.22)}
+
+    nav{position:relative}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:10px;align-items:center}
+    nav .item{position:relative}
+    nav .link{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      color:var(--navy);
+      border:1px solid transparent;
+      background:transparent;
+      cursor:pointer;
+      font-family:'Poppins',sans-serif;
+    }
+    nav .link:hover{
+      border-color:rgba(52,79,111,.18);
+      background:rgba(246,203,204,.18);
+    }
+
+    .dropdown{
+      position:absolute;
+      left:0; top:48px;
+      min-width:260px;
+      background:rgba(255,255,255,.96);
+      border:1px solid rgba(52,79,111,.18);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:10px;
+      display:none;
+      z-index:10;
+    }
+    .dropdown a{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border-radius:12px;
+      color:var(--navy);
+      font-size:13px;
+      font-weight:700;
+      font-family:'Poppins',sans-serif;
+    }
+    .dropdown a:hover{
+      background:rgba(246,203,204,.22);
+      color:var(--rose);
+    }
+    .item.open > .dropdown{display:block}
+
+    /* ✅ SEARCH BAR */
+    .search-wrap{position:relative}
+    .search{
+      display:flex;align-items:center;gap:10px;
+      border:1px solid rgba(52,79,111,.18);
+      background:#fff;
+      border-radius:999px;
+      padding:10px 12px;
+      min-width:260px;
+      color:var(--navy);
+      box-shadow:0 10px 22px rgba(52,79,111,.08);
+    }
+    .search input{
+      width:100%;
+      border:0;outline:0;
+      background:transparent;
+      font-family:'Poppins',sans-serif;
+      font-size:14px;
+      font-weight:700;
+      color:var(--navy);
+    }
+    .search input::placeholder{color:rgba(52,79,111,.55)}
+
+    .results{
+      position:absolute;
+      right:0;
+      top:calc(100% + 10px);
+      width:min(420px, 92vw);
+      background:rgba(255,255,255,.96);
+      border:1px solid rgba(52,79,111,.18);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:10px;
+      display:none;
+      z-index:20;
+    }
+    .results.open{display:block}
+    .res-title{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(52,79,111,.75);
+      font-weight:900;
+      font-family:'Poppins',sans-serif;
+    }
+    .res-item{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border-radius:12px;
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(52,79,111,.10);
+      margin-bottom:8px;
+      cursor:pointer;
+      font-family:'Poppins',sans-serif;
+    }
+    .res-item:hover{background:#fff}
+    .res-item strong{
+      font-weight:900;
+      color:var(--navy);
+      font-size:13px;
+    }
+    .res-item span{
+      color:rgba(52,79,111,.68);
+      font-weight:800;
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    /* ✅ Cart pill + badge */
+    .cart-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(52,79,111,.18);
+      background:#fff;
+      color:var(--navy);
+      font-weight:800;
+      font-size:13px;
+      font-family:'Poppins',sans-serif;
+      box-shadow:0 10px 22px rgba(52,79,111,.08);
+    }
+    .cart-link:hover{
+      background:rgba(246,203,204,.18);
+      border-color:rgba(52,79,111,.22);
+    }
+    .cart-badge{
+      display:inline-flex;
+      min-width:22px;
+      height:22px;
+      padding:0 7px;
+      border-radius:999px;
+      background:rgba(151,73,90,.15);
+      border:1px solid rgba(151,73,90,.25);
+      color:var(--rose);
+      font-weight:900;
+      font-size:12px;
+      line-height:1;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero{
+      padding:74px 0 42px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.24)),
+        url("b.png");
+      background-size:cover;
+      background-position:center;
+      border-bottom:1px solid rgba(52,79,111,.14);
+    }
+    .hero-inner{
+      text-align:center;
+      color:#fff;
+      max-width:860px;
+      margin:0 auto;
+    }
+    .hero h1{
+      margin:0;
+      font-size:54px;
+      line-height:1.05;
+      font-weight:800;
+      text-shadow:0 18px 40px rgba(0,0,0,.25);
+    }
+    .hero h2{
+      margin:10px 0 0;
+      font-size:20px;
+      font-weight:600;
+      color:rgba(255,255,255,.92);
+      letter-spacing:.2px;
+      font-family:'Poppins',sans-serif;
+    }
+    .hero .cta{
+      margin-top:18px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 16px;
+      border-radius:999px;
+      border:2px solid rgba(255,255,255,.65);
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      font-weight:900;
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:var(--btnShadow);
+      transition:transform .15s ease, background .15s ease;
+      font-family:'Poppins',sans-serif;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.18)}
+    .btn.primary{
+      background:#fff;
+      color:var(--navy);
+      border-color:#fff;
+    }
+    .btn.primary:hover{background:rgba(255,255,255,.92)}
+
+    /* ---------- SECTIONS ---------- */
+    section{padding:40px 0}
+    .section-title{
+      margin:0 0 10px;
+      font-size:30px;
+      color:var(--navy);
+      font-weight:900;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.7;
+      max-width:85ch;
+      font-weight:600;
+      font-family:'Poppins',sans-serif;
+    }
+
+    /* Welcome */
+    .welcome{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:center;
+    }
+    .welcome-media{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .welcome-media .ph{
+      border-radius:18px;
+      border:1px solid rgba(52,79,111,.18);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      background:#fff;
+      aspect-ratio: 4 / 5;
+      background-size:cover;
+      background-position:center;
+    }
+
+    /* Featured Products */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 4;
+      background:var(--card);
+      border:1px solid rgba(52,79,111,.18);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+    .img{
+      height:210px;
+      background:#eee;
+      background-size:cover;
+      background-position:center;
+    }
+    .card-body{padding:14px}
+    .prod-name{
+      margin:0;
+      font-size:24px;
+      line-height:1.15;
+      color:var(--navy);
+      font-weight:900;
+    }
+    .cats{
+      margin:10px 0 0;
+      color:rgba(151,73,90,.9);
+      font-weight:800;
+      font-size:13px;
+      font-family:'Poppins',sans-serif;
+    }
+    .card-actions{
+      padding:0 14px 16px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .btn2{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 14px;
+      border-radius:12px;
+      border:2px solid rgba(52,79,111,.55);
+      background:#fff;
+      color:var(--navy);
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+      white-space:nowrap;
+      font-family:'Poppins',sans-serif;
+    }
+    .btn2:hover{background:rgba(246,203,204,.22)}
+    .btn2:disabled{opacity:.55;cursor:not-allowed}
+
+    /* Popular categories */
+    .cat-card{grid-column: span 4;}
+    .cat-card .img{height:150px}
+    .cat-card .card-body{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .cat-card .prod-name{font-size:20px;margin:0}
+
+    /* Reviews */
+    .reviews{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .review{grid-column: span 6; padding:16px}
+    .stars{color:var(--rose);font-weight:900;letter-spacing:2px;font-family:'Poppins',sans-serif}
+    .quote{margin:10px 0 0;color:var(--muted);line-height:1.7;font-weight:600;font-family:'Poppins',sans-serif}
+    .who{margin:12px 0 0;font-weight:900;color:var(--navy);font-family:var(--serif)}
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(52,79,111,.14);
+      background:linear-gradient(180deg, rgba(52,79,111,.92), rgba(52,79,111,.98));
+      color:#fff;
+      padding:34px 0 26px;
+      margin-top:10px;
+    }
+    .foot{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr 1fr;
+      gap:18px;
+    }
+    .foot .brand{color:#fff}
+    .foot .brand small{color:rgba(255,255,255,.75)}
+    .foot p{margin:10px 0 0;color:rgba(255,255,255,.78);line-height:1.7;font-weight:600;font-family:'Poppins',sans-serif}
+    .foot h3{
+      margin:0 0 10px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:rgba(255,255,255,.92);
+      font-weight:900;
+      font-family:'Poppins',sans-serif;
+    }
+    .foot a{display:block;color:rgba(255,255,255,.78);padding:6px 0;font-weight:700;font-family:'Poppins',sans-serif}
+    .foot a:hover{color:#fff}
+    .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 980px){
+      .welcome{grid-template-columns:1fr}
+      .card{grid-column: span 6;}
+      .cat-card{grid-column: span 6;}
+      .review{grid-column: span 12;}
+      .search-wrap{display:none}
+      .menu-btn{display:inline-flex}
+      nav ul{display:none}
+      nav.open ul{
+        display:flex;
+        flex-direction:column;
+        position:absolute;
+        right:0; top:54px;
+        background:rgba(255,255,255,.96);
+        border:1px solid rgba(52,79,111,.18);
+        border-radius:16px;
+        padding:10px;
+        width:min(360px, 92vw);
+        box-shadow:var(--shadow);
+      }
+      .dropdown{position:static;display:none;box-shadow:none;margin-top:6px}
+      .item.open > .dropdown{display:block}
+      .foot{grid-template-columns:1fr}
+      .hero h1{font-size:42px}
+    }
+    @media (max-width: 560px){
+      .card{grid-column: span 6;}
+      .cat-card{grid-column: span 6;}
+      .hero h1{font-size:34px}
+      .hero h2{font-size:16px}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <!-- ✅ Logo + Brand Text (clickable to home) -->
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="logo-wrap" aria-hidden="true">
+          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+        </span>
+        <span>
+          <span class="brand-title">The Candle Studio</span>
+          <small>Candle Making Supplies</small>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <!-- SEARCH -->
+        <div class="search-wrap" role="search" aria-label="Search the website">
+          <div class="search">
+            🔎 <input id="siteSearch" type="search" placeholder="Search the website..." />
+          </div>
+
+          <div class="results" id="results" aria-live="polite">
+            <p class="res-title">Results</p>
+            <div id="resultsList"></div>
+          </div>
+        </div>
+
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu">☰ Menu</button>
+
+        <nav id="nav" aria-label="Main navigation">
+          <ul>
+            <li class="item">
+              <button class="link" type="button" data-dd="true">All Products ▾</button>
+              <div class="dropdown" role="menu" aria-label="All products menu">
+                <a href="Candle_wax.html">Candle Wax</a>
+                <a href="Molds.html">Candle Molds</a>
+                <a href="Coloring.html">Candle Dye</a>
+                <a href="Fragrance_Oils.html">Fragrance Oils</a>
+                <a href="Jars.html">Jars & Containers</a>
+                <a href="jesmoniteprod.html">Jesmonite</a>
+                <a href="Materials_Tools.html">Tools</a>
+                <a href="Tools & Materials.html">Wicks & Accessories</a>
+              </div>
+            </li>
+
+            <li class="item"><a class="link" href="About.html">About</a></li>
+            <li class="item"><a class="link" href="Contact_us.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Cart -->
+        <a class="cart-link" href="cart.html" aria-label="Cart" title="Cart">
+          🛒 Cart <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <div class="container hero-inner">
+      <h1>The Candle Studio</h1>
+      <h2>Candle Making Supplies</h2>
+      <div class="cta">
+        <a class="btn primary" href="#featured">Shop Now</a>
+        <a class="btn" href="Contact_us.html">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WELCOME -->
+  <section id="about">
+    <div class="container welcome">
+      <div>
+        <h2 class="section-title">Welcome To The Candle Studio</h2>
+        <p class="lead">
+          Premium wholesale raw materials for candle makers and home decor.
+          Whether you’re starting a new hobby or growing your candle business, you’ll find everything you need right here.
+        </p>
+        <a class="btn2" href="#featured">Shop Now</a>
+      </div>
+
+      <div class="welcome-media" aria-label="Welcome images">
+        <div class="ph" style="background-image:url('can.png')"></div>
+        <div class="ph" style="background-image:url('candlest.png')"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section id="featured">
+    <div class="container">
+      <h2 class="section-title">Our Featured Products</h2>
+      <p class="lead">A few popular items to highlight</p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="img" style="background-image:url('c.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Jesmonite</h3>
+            <div class="cats">Best Quality Jesmonite</div>
+          </div>
+          <div class="card-actions">
+            <a class="btn2" href="jesmoniteprod.html">View Product</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="img" style="background-image:url('candle.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Candle Wax</h3>
+            <div class="cats">Best Quality Candle Wax</div>
+          </div>
+          <div class="card-actions">
+            <a class="btn2" href="Candle_wax.html">View Product</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="img" style="background-image:url('wicksandasseso.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Wicks & Accessories</h3>
+            <div class="cats">Everything you need for candle making.</div>
+          </div>
+          <div class="card-actions">
+            <a class="btn2" href="Tools & Materials.html">View Product</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR CATEGORIES -->
+  <section id="sale">
+    <div class="container">
+      <h2 class="section-title">Shop by Popular Categories</h2>
+      <p class="lead">Quick links to the most visited categories.</p>
+
+      <div class="grid">
+        <article class="card cat-card">
+          <div class="img" style="background-image:url('frpic.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Fragrance Oils</h3>
+            <a class="btn2" href="Fragrance_Oils.html">Shop now</a>
+          </div>
+        </article>
+
+        <article class="card cat-card">
+          <div class="img" style="background-image:url('colo.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Candle Dye</h3>
+            <a class="btn2" href="Coloring.html">Shop now</a>
+          </div>
+        </article>
+
+        <article class="card cat-card">
+          <div class="img" style="background-image:url('smallarc.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Candle Molds</h3>
+            <a class="btn2" href="Molds.html">Shop now</a>
+          </div>
+        </article>
+
+        <article class="card cat-card">
+          <div class="img" style="background-image:url('c.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Jesmonite & Resin Molds</h3>
+            <a class="btn2" href="Jesmonite.html">View Product</a>
+          </div>
+        </article>
+
+        <article class="card cat-card">
+          <div class="img" style="background-image:url('toolss.png')"></div>
+          <div class="card-body">
+            <h3 class="prod-name">Tools</h3>
+            <a class="btn2" href="Tools-&-Materials.html">View Product</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Customers Reviews</h2>
+      <p class="lead">A few kind words from customers (swap with real reviews anytime).</p>
+
+      <div class="reviews">
+        <div class="card review">
+          <div class="stars">★★★★★</div>
+          <div class="quote">I love dealing with The Candle Studio! The quality is amazing, and they’re always helpful when I have questions.</div>
+          <div class="who">— Customer Name</div>
+        </div>
+        <div class="card review">
+          <div class="stars">★★★★★</div>
+          <div class="quote">Fast delivery, great service, and so many options to choose from. Highly recommended!</div>
+          <div class="who">— Customer Name</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div class="brand" style="margin-bottom:8px">
+            <span class="logo-wrap" aria-hidden="true" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);box-shadow:none;">
+              <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+            </span>
+            <span>
+              <span style="display:block;font-size:15px;line-height:1.1;font-family:var(--serif);font-weight:700;">
+                The Candle Studio
+              </span>
+              <small>Candle Making Supplies</small>
+            </span>
+          </div>
+          <p>
+            The Candle Studio supplies high-quality candle-making materials for hobbyists, small businesses, and wholesalers alike.
+            From waxes to fragrance oils, we provide everything you need to create exceptional candles.
+          </p>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <a href="About.html">About</a>
+          <a href="Contact_us.html">Contact</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Return Policy</a>
+        </div>
+
+        <div>
+          <h3>Site Links</h3>
+          <a href="Candle_wax.html">Candle Wax</a>
+          <a href="Molds.html">Candle Molds</a>
+          <a href="Fragrance_Oils.html">Fragrance Oils</a>
+          <a href="Jesmonite.html">Jesmonite</a>
+          <a href="Jars.html">Jars & Containers</a>
+        </div>
+      </div>
+
+      <div class="copy">Copyright © <span id="year"></span> | The Candle Studio</div>
+    </div>
+  </footer>
+
+  <script>
+    // ✅ Cart badge (shared cart localStorage)
+    const CART_KEY = "tcs_cart_v1";
+    function getCartCount(){
+      try{
+        const raw = localStorage.getItem(CART_KEY);
+        const cart = raw ? JSON.parse(raw) : [];
+        if(!Array.isArray(cart)) return 0;
+        return cart.reduce((sum, it) => sum + Number(it.qty || 0), 0);
+      }catch{
+        return 0;
+      }
+    }
+    document.getElementById("cartBadge").textContent = String(getCartCount());
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.getElementById("nav");
+    menuBtn?.addEventListener("click", () => nav.classList.toggle("open"));
+
+    // Dropdown
+    document.addEventListener("click", (e) => {
+      const ddBtn = e.target.closest('[data-dd="true"]');
+      const clickedInsideNav = e.target.closest("nav");
+      if (!clickedInsideNav) {
+        document.querySelectorAll(".item.open").forEach(el => el.classList.remove("open"));
+        if (!e.target.closest(".search-wrap")) {
+          document.getElementById("results")?.classList.remove("open");
+        }
+        return;
+      }
+      if (ddBtn) {
+        const item = ddBtn.closest(".item");
+        document.querySelectorAll(".item.open").forEach(el => { if (el !== item) el.classList.remove("open"); });
+        item.classList.toggle("open");
+      }
+    });
+
+    // ✅ SITE SEARCH
+    const searchInput = document.getElementById("siteSearch");
+    const results = document.getElementById("results");
+    const resultsList = document.getElementById("resultsList");
+
+    const PAGES = [
+      { title:"Home", url:"The Candle Studio.html", tags:["home","main"] },
+      { title:"About", url:"About.html", tags:["about","story"] },
+      { title:"Cart", url:"cart.html", tags:["cart","checkout","order"] },
+      { title:"Candle Wax", url:"Candle_wax.html", tags:["wax","candle wax"] },
+      { title:"Candle Molds", url:"Molds.html", tags:["molds","moulds"] },
+      { title:"Candle Dye", url:"Coloring.html", tags:["dye","color","colour","wax dye"] },
+      { title:"Fragrance Oils", url:"Fragrance_Oils.html", tags:["fragrance","oils","scent"] },
+      { title:"Jars & Containers", url:"Jars.html", tags:["jars","containers"] },
+      { title:"Jesmonite", url:"Jesmonite.html", tags:["jesmonite"] },
+      { title:"Tools", url:"Materials_Tools.html", tags:["tools","equipment"] },
+      { title:"Wicks & Accessories", url:"Tools%20%26%20Materials.html", tags:["wicks","accessories"] }
+    ];
+
+    function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+    function renderResults(items){
+      resultsList.innerHTML = "";
+      if(!items.length){
+        results.classList.add("open");
+        resultsList.innerHTML =
+          `<div style="color:rgba(52,79,111,.75);font-weight:800;font-family:Poppins,sans-serif;padding:8px 6px;">No results.</div>`;
+        return;
+      }
+
+      items.slice(0, 10).forEach((it) => {
+        const row = document.createElement("div");
+        row.className = "res-item";
+        row.innerHTML = `<strong>${it.title}</strong><span>Page</span>`;
+        row.addEventListener("click", () => { window.location.href = it.url; });
+        resultsList.appendChild(row);
+      });
+      results.classList.add("open");
+    }
+
+    searchInput?.addEventListener("input", () => {
+      const q = normalize(searchInput.value);
+      if(!q){
+        results.classList.remove("open");
+        resultsList.innerHTML = "";
+        return;
+      }
+
+      const hits = PAGES
+        .map((it) => {
+          const hay = [it.title, ...(it.tags || [])].join(" ").toLowerCase();
+          const score =
+            (it.title.toLowerCase().includes(q) ? 3 : 0) +
+            ((it.tags || []).some(t => t.toLowerCase().includes(q)) ? 2 : 0) +
+            (hay.includes(q) ? 1 : 0);
+          return { ...it, score };
+        })
+        .filter(x => x.score > 0)
+        .sort((a,b) => b.score - a.score || a.title.localeCompare(b.title))
+        .map(x => ({ title: x.title, url: x.url }));
+
+      renderResults(hits);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".search-wrap")) results?.classList.remove("open");
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") results?.classList.remove("open");
+    });
+  </script>
+</body>
+</html>

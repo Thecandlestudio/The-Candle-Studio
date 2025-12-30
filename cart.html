@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Candle Studio | Cart</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --rose:#97495a;
+      --blush:#f6cbcc;
+      --navy:#344F6F;
+      --lav:#B0A0BA;
+
+      --bg:#fff8f9;
+      --card:#ffffff;
+      --text:#1c2230;
+      --muted:rgba(52,79,111,.78);
+      --line:rgba(52,79,111,.22);
+      --shadow:0 12px 30px rgba(52,79,111,.18);
+      --radius:18px;
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 16px}
+
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(246,203,204,.75);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; color:var(--navy);
+    }
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background:linear-gradient(135deg,var(--rose),var(--lav));
+      box-shadow:0 10px 22px rgba(151,73,90,.22);
+      flex:0 0 auto;
+    }
+    .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .pill{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.65);
+      color:var(--navy);
+      font-weight:700;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+    }
+    .pill:hover{background:rgba(255,255,255,.9)}
+    .count{
+      display:inline-flex;
+      min-width:20px;
+      height:20px;
+      padding:0 6px;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background:rgba(151,73,90,.12);
+      border:1px solid rgba(151,73,90,.25);
+      color:var(--rose);
+      font-weight:900;
+      font-size:12px;
+      line-height:1;
+    }
+
+    .hero{
+      padding:26px 0 18px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(176,160,186,.20), rgba(246,203,204,.35));
+    }
+    .hero h1{
+      margin:0;
+      font-size:28px;
+      color:var(--navy);
+      letter-spacing:.2px;
+    }
+    .hero p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:75ch;
+    }
+
+    main{padding:18px 0 32px}
+    .layout{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:14px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card .head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background:rgba(246,203,204,.20);
+    }
+    .card .head h2{
+      margin:0;
+      font-size:16px;
+      font-weight:900;
+      color:var(--navy);
+      letter-spacing:.02em;
+    }
+
+    .table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+    }
+    .table th, .table td{
+      padding:12px 12px;
+      border-bottom:1px solid rgba(52,79,111,.18);
+      vertical-align:middle;
+      text-align:left;
+    }
+    .table th{
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:rgba(52,79,111,.8);
+      background:rgba(176,160,186,.15);
+    }
+    .table tr:last-child td{border-bottom:none}
+
+    .prod{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      min-width:220px;
+    }
+    .thumb{
+      width:54px;height:54px;border-radius:14px;
+      background:#eee;
+      background-size:cover;
+      background-position:center;
+      border:1px solid rgba(52,79,111,.18);
+      flex:0 0 auto;
+    }
+    .pname{
+      margin:0;
+      font-weight:900;
+      color:var(--navy);
+      line-height:1.2;
+    }
+    .small{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .money{
+      font-weight:900;
+      color:var(--rose);
+      white-space:nowrap;
+    }
+
+    .qty{
+      display:inline-flex;
+      align-items:center;
+      border:1px solid rgba(52,79,111,.25);
+      border-radius:999px;
+      overflow:hidden;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .qty button{
+      border:0;
+      background:rgba(176,160,186,.22);
+      color:var(--navy);
+      font-weight:900;
+      padding:8px 10px;
+      cursor:pointer;
+    }
+    .qty button:hover{background:rgba(176,160,186,.35)}
+    .qty span{
+      min-width:34px;
+      text-align:center;
+      font-weight:900;
+      color:var(--navy);
+      padding:0 10px;
+    }
+
+    .remove{
+      border:0;
+      background:transparent;
+      color:rgba(52,79,111,.8);
+      font-weight:900;
+      cursor:pointer;
+      text-decoration:underline;
+      padding:6px 0;
+    }
+    .remove:hover{color:var(--rose)}
+
+    .empty{
+      padding:16px;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .empty a{
+      text-decoration:underline;
+      color:var(--navy);
+    }
+
+    .sum{ padding:14px 16px; }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin:10px 0;
+      color:var(--navy);
+      font-weight:800;
+    }
+    .row small{
+      font-weight:700;
+      color:rgba(52,79,111,.75);
+    }
+    .total{
+      font-size:18px;
+      font-weight:1000;
+      color:var(--rose);
+    }
+
+    .note-label{
+      display:block;
+      margin-top:12px;
+      font-weight:900;
+      color:var(--navy);
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    textarea{
+      margin-top:8px;
+      width:100%;
+      min-height:84px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(52,79,111,.25);
+      outline:none;
+      font-family:inherit;
+      background:rgba(255,255,255,.85);
+      resize:vertical;
+    }
+
+    .btn{
+      width:100%;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:12px;
+      border:2px solid rgba(52,79,111,.55);
+      background:#fff;
+      color:var(--navy);
+      font-weight:900;
+      letter-spacing:.02em;
+      font-size:13px;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .btn:hover{
+      background:rgba(246,203,204,.35);
+      border-color:rgba(52,79,111,.75);
+    }
+    .btn.checkout{
+      margin-top:10px;
+      background:linear-gradient(135deg, rgba(151,73,90,.18), rgba(246,203,204,.75));
+      border-color:rgba(151,73,90,.35);
+      color:var(--rose);
+    }
+    .btn.checkout:hover{
+      background:linear-gradient(135deg, rgba(151,73,90,.25), rgba(246,203,204,.9));
+    }
+
+    /* ✅ Delivery select styling (matches your UI) */
+    .select{
+      width:100%;
+      margin-top:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(52,79,111,.25);
+      outline:none;
+      font-family:inherit;
+      font-weight:800;
+      color:var(--navy);
+      background:rgba(255,255,255,.85);
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(52,79,111,.14);
+      background:linear-gradient(180deg, rgba(52,79,111,.92), rgba(52,79,111,.98));
+      color:#fff;
+      padding:34px 0 26px;
+      margin-top:10px;
+    }
+    .foot{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr 1fr;
+      gap:18px;
+    }
+    .foot .brand{color:#fff}
+    .foot .brand small{color:rgba(255,255,255,.75)}
+    .foot p{margin:10px 0 0;color:rgba(255,255,255,.78);line-height:1.7;font-weight:600;font-family:'Poppins',sans-serif}
+    .foot h3{
+      margin:0 0 10px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:rgba(255,255,255,.92);
+      font-weight:900;
+      font-family:'Poppins',sans-serif;
+    }
+    .foot a{display:block;color:rgba(255,255,255,.78);padding:6px 0;font-weight:700;font-family:'Poppins',sans-serif}
+    .foot a:hover{color:#fff}
+    .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
+
+    @media (max-width: 950px){
+      .layout{grid-template-columns:1fr}
+    }
+    @media (max-width: 560px){
+      .table th:nth-child(2),
+      .table td:nth-child(2){display:none;}
+      .prod{min-width:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="line-height:1.1">The Candle Studio</div>
+          <div style="font-size:12px;font-weight:700;color:rgba(52,79,111,.75)">Shopping Cart</div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="pill" id="continueShoppingBtn" type="button">← Continue Shopping</button>
+
+        <span class="pill" style="cursor:default">
+          Items <span class="count" id="itemsCountBadge">0</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="container">
+      <h1>Your Cart</h1>
+      <p>
+        Review your items, adjust quantities, and then checkout (demo). This page uses the same cart saved in your browser.
+      </p>
+    </div>
+  </div>
+
+  <main>
+    <div class="container layout">
+      <!-- LEFT: Cart items -->
+      <section class="card" aria-label="Cart items">
+        <div class="head">
+          <h2>Cart Products</h2>
+          <button class="pill" id="clearBtn" type="button">Clear cart</button>
+        </div>
+
+        <div id="cartWrap"></div>
+      </section>
+
+      <!-- RIGHT: Summary -->
+      <aside class="card" aria-label="Order summary">
+        <div class="head">
+          <h2>Order Summary</h2>
+        </div>
+
+        <div class="sum">
+          <div class="row"><small>Items</small> <span id="itemsCount">0</span></div>
+
+          <!-- ✅ Delivery method with fees -->
+          <label class="note-label" for="deliveryMethod">Delivery Method</label>
+          <select id="deliveryMethod" class="select" aria-label="Delivery Method">
+            <option value="Beirut Area">Beirut Area (+$3)</option>
+            <option value="Outside Beirut">Outside Beirut (+$4)</option>
+          </select>
+
+          <!-- ✅ Total (Products + Delivery) -->
+          <div class="row"><small>Total</small> <span class="total" id="subtotal">$0.00</span></div>
+
+          <label class="note-label" for="note">Order note (optional)</label>
+          <textarea id="note" placeholder="Write a note about your order (e.g., gift wrap, preferred pickup time)"></textarea>
+
+          <button class="btn checkout" id="checkoutBtn" type="button">Checkout</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div class="brand" style="margin-bottom:8px">
+            <span class="logo" aria-hidden="true"></span>
+            <span>
+              <span style="display:block;font-weight:800;color:#fff">The Candle Studio</span>
+              <small style="color:rgba(255,255,255,.75)">Candle Making Supplies</small>
+            </span>
+          </div>
+          <p>
+            The Candle Studio supplies high-quality candle-making materials for hobbyists, small businesses, and wholesalers alike.
+            From waxes to fragrance oils, we provide everything you need to create exceptional candles.
+          </p>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <a href="index.html">Home</a>
+          <a href="About.html">About</a>
+          <a href="cart.html">Cart</a>
+          <a href="Contact_us.html">Contact</a>
+        </div>
+
+        <div>
+          <h3>Shop</h3>
+          <a href="Candle_wax.html">Candle Wax</a>
+          <a href="Molds.html">Candle Molds</a>
+          <a href="Fragrance_Oils.html">Fragrance Oils</a>
+          <a href="Jars.html">Jars & Containers</a>
+          <a href="Jesmonite.html">Jesmonite</a>
+        </div>
+      </div>
+
+      <div class="copy">Copyright © <span id="year"></span> | The Candle Studio</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Google Form Autofill Config ---
+    const GOOGLE_FORM_BASE =
+      "https://docs.google.com/forms/d/e/1FAIpQLSf7R8XrKpV-MHfHcspS0JSeCQpxp_SumZLrqAZ0MIuWHjh75A/viewform?usp=pp_url";
+
+    // Existing entries in your form
+    const ENTRY_ORDER_ITEMS = "entry.815040252";
+    const ENTRY_ORDER_NOTE  = "entry.1751745976";
+    const ENTRY_TOTAL       = "entry.1635440353";
+
+    // ✅ Delivery entry from your form (from your link: entry.1483676993=Beirut+Area)
+    const ENTRY_DELIVERY_METHOD = "entry.1483676993";
+
+    // ✅ Delivery fees
+    const DELIVERY_PRICES = {
+      "Beirut Area": 3,
+      "Outside Beirut": 4
+    };
+
+    function buildGoogleFormUrl({ itemsText, noteText, totalNumber, deliveryMethod }) {
+      const params = new URLSearchParams();
+      params.set(ENTRY_ORDER_ITEMS, itemsText);
+      params.set(ENTRY_ORDER_NOTE, noteText);
+      params.set(ENTRY_TOTAL, String(totalNumber.toFixed(2)));
+      params.set(ENTRY_DELIVERY_METHOD, deliveryMethod);
+      return `${GOOGLE_FORM_BASE}&${params.toString()}`;
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const CART_KEY = "tcs_cart_v1";
+    let cart = [];
+
+    const $ = (s) => document.querySelector(s);
+
+    const cartWrap = $("#cartWrap");
+    const itemsCountEl = $("#itemsCount");
+    const itemsCountBadge = $("#itemsCountBadge");
+    const subtotalEl = $("#subtotal");
+    const checkoutBtn = $("#checkoutBtn");
+    const deliverySelect = $("#deliveryMethod");
+
+    function loadCart(){
+      try{
+        const raw = localStorage.getItem(CART_KEY);
+        cart = raw ? JSON.parse(raw) : [];
+        if(!Array.isArray(cart)) cart = [];
+      }catch{
+        cart = [];
+      }
+    }
+
+    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function money(n){ return "$" + Number(n).toFixed(2); }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // ✅ Totals now include delivery fee
+    function totals(){
+      const items = cart.reduce((sum, it) => sum + Number(it.qty || 0), 0);
+      const subtotal = cart.reduce(
+        (sum, it) => sum + (Number(it.qty || 0) * Number(it.price || 0)),
+        0
+      );
+
+      const deliveryMethod = deliverySelect.value;
+      const deliveryFee = DELIVERY_PRICES[deliveryMethod] || 0;
+
+      const finalTotal = subtotal + deliveryFee;
+
+      itemsCountEl.textContent = String(items);
+      itemsCountBadge.textContent = String(items);
+      subtotalEl.textContent = money(finalTotal);
+    }
+
+    // ✅ helper: go back to previous page (no home fallback)
+    function goBackPrev(){
+      window.history.go(-1);
+    }
+
+    function render(){
+      if(!cart.length){
+        cartWrap.innerHTML = `
+          <div class="empty">
+            Your cart is empty.
+            <a href="#" id="backToProductsLink">Go back to products</a>.
+          </div>
+        `;
+        const backLink = document.getElementById("backToProductsLink");
+        backLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          goBackPrev();
+        });
+
+        totals();
+        return;
+      }
+
+      cartWrap.innerHTML = `
+        <div style="overflow:auto">
+          <table class="table" aria-label="Cart table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Unit</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cart.map(it => `
+                <tr data-id="${escapeHtml(it.id)}">
+                  <td>
+                    <div class="prod">
+                      <div class="thumb" style="${it.img ? `background-image:url('${escapeHtml(it.img)}')` : ""}"></div>
+                      <div>
+                        <p class="pname">${escapeHtml(it.name)}</p>
+                        <p class="small">${escapeHtml(it.variant || "")}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="money">${money(it.price)}</td>
+                  <td>
+                    <div class="qty">
+                      <button type="button" data-action="dec" aria-label="Decrease quantity">−</button>
+                      <span>${it.qty}</span>
+                      <button type="button" data-action="inc" aria-label="Increase quantity">+</button>
+                    </div>
+                  </td>
+                  <td class="money">${money(Number(it.price) * Number(it.qty))}</td>
+                  <td><button class="remove" type="button" data-action="remove">Remove</button></td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      totals();
+    }
+
+    function setQty(id, qty){
+      const it = cart.find(x => x.id === id);
+      if(!it) return;
+      it.qty = Math.max(1, qty);
+      saveCart();
+      render();
+    }
+
+    function removeItem(id){
+      cart = cart.filter(x => x.id !== id);
+      saveCart();
+      render();
+    }
+
+    function clearCart(){
+      cart = [];
+      saveCart();
+      render();
+    }
+
+    cartWrap.addEventListener("click", (e) => {
+      const tr = e.target.closest("tr[data-id]");
+      if(!tr) return;
+      const id = tr.getAttribute("data-id");
+      const btn = e.target.closest("button");
+      if(!btn) return;
+
+      const action = btn.dataset.action;
+      const it = cart.find(x => x.id === id);
+      if(!it) return;
+
+      if(action === "inc") setQty(id, it.qty + 1);
+      if(action === "dec") setQty(id, it.qty - 1);
+      if(action === "remove") removeItem(id);
+    });
+
+    $("#clearBtn").addEventListener("click", () => {
+      if(confirm("Clear all items from your cart?")) clearCart();
+    });
+
+    // ✅ Update totals immediately when delivery changes
+    deliverySelect.addEventListener("change", totals);
+
+    checkoutBtn.addEventListener("click", () => {
+      if (!cart.length) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      const itemsText = cart
+        .map((it) => {
+          const lineTotal = (Number(it.price) * Number(it.qty));
+          const variant = it.variant ? ` (${it.variant})` : "";
+          return `${it.qty} x ${it.name}${variant} — $${lineTotal.toFixed(2)}`;
+        })
+        .join("\n");
+
+      const noteText = document.getElementById("note").value.trim();
+
+      // ✅ subtotal of products
+      const subtotal = cart.reduce(
+        (sum, it) => sum + (Number(it.price) * Number(it.qty)),
+        0
+      );
+
+      // ✅ add delivery fee
+      const deliveryMethod = deliverySelect.value; // "Beirut Area" or "Outside Beirut"
+      const deliveryFee = DELIVERY_PRICES[deliveryMethod] || 0;
+
+      const totalNumber = subtotal + deliveryFee;
+
+      window.location.href = buildGoogleFormUrl({
+        itemsText,
+        noteText,
+        totalNumber,
+        deliveryMethod
+      });
+    });
+
+    document.getElementById("continueShoppingBtn").addEventListener("click", () => {
+      goBackPrev();
+    });
+
+    loadCart();
+    render();
+  </script>
+</body>
+</html>
