@@ -3,19 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Candle Studio | Candle Wicks and Accesories</title>
+  <title>The Candle Studio | Candle Wicks and Accessories</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Your palette */
       --rose:#97495a;
       --blush:#f6cbcc;
       --navy:#344F6F;
       --lav:#B0A0BA;
 
-      /* neutrals */
       --bg:#fff8f9;
       --card:#ffffff;
       --text:#1c2230;
@@ -24,14 +22,20 @@
       --shadow:0 12px 30px rgba(52,79,111,.18);
       --radius:18px;
       --max:1100px;
+
+      --btnShadow: 0 12px 26px rgba(52,79,111,.18);
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
+
+      /* ✅ iPhone notch/home-bar safe area */
+      padding-bottom: env(safe-area-inset-bottom);
     }
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--max);margin:0 auto;padding:0 16px}
@@ -42,22 +46,48 @@
       background:rgba(246,203,204,.75);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
+
+      /* ✅ iPhone notch safe area */
+      padding-top: env(safe-area-inset-top);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
     }
+
+    /* ✅ Logo-only, wide brand (matches your newer style) */
     .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; color:var(--navy);
+      display:flex;
+      align-items:center;
+      gap:0;
+      font-weight:800;
+      color:var(--navy);
+      min-width:auto;
+      flex:1 1 auto;
+      max-width:520px;
     }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:linear-gradient(135deg,var(--rose),var(--lav));
-      box-shadow:0 10px 22px rgba(151,73,90,.22);
-      flex:0 0 auto;
+    .logo-wrap{
+      width:100%;
+      height:52px;
+      border-radius:16px;
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(52,79,111,.18);
+      box-shadow:0 10px 22px rgba(52,79,111,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
     }
+    .logo-img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      padding:6px 10px;
+    }
+
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
     .pill{
       padding:9px 12px;
       border-radius:999px;
@@ -70,6 +100,8 @@
       align-items:center;
       gap:8px;
       cursor:pointer;
+      box-shadow:0 10px 22px rgba(52,79,111,.08);
+      -webkit-tap-highlight-color: transparent;
     }
     .pill:hover{background:rgba(255,255,255,.9)}
     .cart-count{
@@ -134,6 +166,7 @@
       margin-bottom:12px;
     }
     .count{color:var(--muted); font-weight:700}
+
     .sort{
       display:flex; align-items:center; gap:10px;
       padding:10px 12px;
@@ -143,6 +176,7 @@
       color:var(--navy);
       font-weight:700;
       min-width:260px;
+      box-shadow:0 10px 22px rgba(52,79,111,.08);
     }
     .sort select{
       width:100%;
@@ -168,17 +202,20 @@
       box-shadow:var(--shadow);
       position:relative;
     }
+
+    /* ✅ better image fit + no weird cropping on mobile */
     .img{
       height:220px;
       background:#eee;
       background-size:cover;
       background-position:center;
     }
+
     .content{padding:14px}
     .name{
       margin:0;
-      font-size:26px;
-      line-height:1.05;
+      font-size:22px;
+      line-height:1.15;
       color:var(--navy);
       font-weight:800;
       letter-spacing:.2px;
@@ -189,6 +226,7 @@
       font-weight:800;
       color:rgba(52,79,111,.9);
     }
+
     .btnrow{
       padding:0 14px 16px;
       display:flex;
@@ -208,6 +246,7 @@
       font-size:13px;
       text-transform:uppercase;
       cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn:hover{
       background:rgba(246,203,204,.35);
@@ -225,6 +264,15 @@
     .btn:disabled{
       opacity:.55;
       cursor:not-allowed;
+    }
+
+    /* ✅ nicer focus ring on mobile */
+    .btn:focus-visible,
+    .pill:focus-visible,
+    select:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(151,73,90,.16);
+      border-color: rgba(151,73,90,.45);
     }
 
     /* Out of stock badge */
@@ -296,6 +344,7 @@
       padding:8px 10px;
       font-weight:900;
       cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .close-btn:hover{background:rgba(246,203,204,.55)}
 
@@ -303,6 +352,7 @@
       padding:12px 14px;
       overflow:auto;
       flex:1;
+      -webkit-overflow-scrolling: touch; /* ✅ smooth iOS scrolling */
     }
     .empty{
       border:1px dashed rgba(52,79,111,.35);
@@ -372,6 +422,7 @@
       font-weight:900;
       padding:8px 10px;
       cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .qty button:hover{background:rgba(176,160,186,.35)}
     .qty span{
@@ -388,6 +439,7 @@
       font-weight:900;
       cursor:pointer;
       text-decoration:underline;
+      -webkit-tap-highlight-color: transparent;
     }
     .remove:hover{color:var(--rose)}
     .note{
@@ -406,6 +458,7 @@
       border-top:1px solid var(--line);
       padding:12px 14px 14px;
       background:rgba(176,160,186,.14);
+      padding-bottom: calc(14px + env(safe-area-inset-bottom)); /* ✅ iPhone home bar */
     }
     .row{
       display:flex;
@@ -440,7 +493,7 @@
       background:linear-gradient(135deg, rgba(151,73,90,.25), rgba(246,203,204,.9));
     }
 
-   footer{
+    footer{
       border-top:1px solid rgba(52,79,111,.14);
       background:linear-gradient(180deg, rgba(52,79,111,.92), rgba(52,79,111,.98));
       color:#fff;
@@ -453,7 +506,6 @@
       gap:18px;
     }
     .foot .brand{color:#fff}
-    .foot .brand small{color:rgba(255,255,255,.75)}
     .foot p{margin:10px 0 0;color:rgba(255,255,255,.78);line-height:1.7;font-weight:600}
     .foot h3{
       margin:0 0 10px;
@@ -467,16 +519,55 @@
     .foot a:hover{color:#fff}
     .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700}
 
+    /* ✅ Touch devices: avoid hover “sticking” */
+    @media (hover:none){
+      .pill:hover{background:rgba(255,255,255,.65)}
+      .btn:hover{background:#fff}
+    }
+
     @media (max-width: 900px){
-      .card{grid-column: span 4;}
+      .card{grid-column: span 6;}
       .hero h1{font-size:36px}
       .sort{min-width:0; width:100%;}
+      .logo-wrap{height:56px}
+      .brand{max-width:420px}
     }
-    @media (max-width: 520px){
-      .hero h1{font-size:32px}
-      .name{font-size:24px}
-      .img{height:200px}
+
+    @media (max-width: 560px){
+      /* ✅ Strong mobile layout: 1 column cards + comfy spacing */
+      .hero{padding:44px 0 26px}
+      .hero h1{font-size:30px}
+      .hero p{font-size:14px}
+
+      section{padding:22px 0}
+      .grid{gap:12px}
       .card{grid-column: span 12;}
+      .img{height:200px}
+      .name{font-size:20px}
+
+      /* ✅ top pills wrap nicer */
+      .nav{gap:10px}
+      .nav-actions{gap:8px}
+      .pill{padding:10px 12px;font-size:13px}
+
+      /* ✅ Make sort look good */
+      .bar{gap:10px}
+      .count{width:100%}
+      .sort{width:100%}
+
+      /* ✅ Big “Add to cart” button */
+      .btnrow{padding:0 14px 16px}
+      .btn{
+        width:100%;
+        justify-content:center;
+        padding:14px 14px;
+        font-size:13px;
+      }
+    }
+
+    /* ✅ Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; scroll-behavior:auto !important;}
     }
   </style>
 </head>
@@ -484,19 +575,16 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <div style="line-height:1.1">The Candle Studio</div>
-          <div style="font-size:12px;font-weight:700;color:rgba(52,79,111,.75)">Candle Making Supplies</div>
-        </div>
-      </div>
+      <!-- ✅ Logo only -->
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="logo-wrap" aria-hidden="true">
+          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+        </span>
+      </a>
 
       <div class="nav-actions">
         <a class="pill" href="index.html">← Back to Home</a>
-        
 
-        <!-- VIEW CART button -->
         <button class="pill" id="openCartBtn" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
           🛒 View Cart <span class="cart-count" id="cartCount">0</span>
         </button>
@@ -506,17 +594,16 @@
 
   <div class="hero">
     <div class="container">
-      <h1>The Candle Studio</h1>
+      <h1>Candle Wicks & Accessories</h1>
       <p>
-        This page is a tools & materials overview (not the final product detail page).
-        Browse what you need to make candles and see a quick list of popular products + prices.
+        Browse what you need to make candles and add items to your cart. (Demo cart saved in your browser.)
       </p>
     </div>
   </div>
 
   <section id="tools">
     <div class="container">
-      <h2 class="section-title">Candle Wicks and Accesories</h2>
+      <h2 class="section-title">Candle Wicks and Accessories</h2>
       <p class="lead">
         Here are common supplies used in candle-making. (You can edit this list anytime.)
       </p>
@@ -547,39 +634,55 @@
             <div class="price">$3.00</div>
           </div>
           <div class="btnrow">
-            <button class="btn  add-to-cart" type="button"
-              data-id="wicks" data-name="Candle Wicks 61ml" data-price="3.00" data-img="l.png">
+            <button class="btn add-to-cart" type="button"
+              data-id="wicks-61ml" data-name="Candle Wicks 61ml" data-price="3.00" data-img="l.png">
               Add to cart
-    
+            </button>
           </div>
         </article>
 
-      
-
-      
+        <!-- 2 -->
+        <article class="card">
+          <div class="img" style="background-image:url('e.png')"></div>
+          <div class="content">
+            <h3 class="name">Candle Wick Sticker Roll (100 stickers)</h3>
+            <div class="price">$3.00</div>
+          </div>
+          <div class="btnrow">
+            <button class="btn add-to-cart" type="button"
+              data-id="wick-stickers-100" data-name="Candle Wick Sticker Roll (100 stickers)" data-price="3.00" data-img="e.png">
+              Add to cart
+            </button>
+          </div>
+        </article>
 
         <!-- 3 -->
-       <article class="card"> <div class="img" style="background-image:url('e.png')"></div> 
-     <div class="content"> <h3 class="name">Candle Wick sticker Roll
-100 stickers/roll </h3>
-         <div class="price">$3.00</div> </div> <div class="btnrow"> 
-            <button class="btn add-to-cart" type="button" data-id="white-beeswax" data-name="Candle Wick sticker Roll
-100 stickers/roll " data-price="3.00" data-img="c.png"> Add to cart </button> 
-           </div>
-       </article>
-
-        <!-- 4 -->
         <article class="card">
           <div class="img" style="background-image:url('i.png')"></div>
           <div class="content">
-            <h3 class="name">Candle Wick Wooden holder 10pc </h3>
+            <h3 class="name">Wooden Wick Holder (10 pcs)</h3>
             <div class="price">$2.00</div>
           </div>
           <div class="btnrow">
             <button class="btn add-to-cart" type="button"
-              data-id="ribbons" data-name="Candle Wick Wooden holder 10pc " data-price="2.00" data-img="i.png">
+              data-id="wood-holder-10" data-name="Wooden Wick Holder (10 pcs)" data-price="2.00" data-img="i.png">
               Add to cart
-           
+            </button>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card">
+          <div class="img" style="background-image:url('f.png')"></div>
+          <div class="content">
+            <h3 class="name">Waxed Candle Wicks with Base (10cm)</h3>
+            <div class="price">$2.75</div>
+          </div>
+          <div class="btnrow">
+            <button class="btn add-to-cart" type="button"
+              data-id="waxed-wick-10cm" data-name="Waxed Candle Wicks with Base (10cm)" data-price="2.75" data-img="f.png">
+              Add to cart
+            </button>
           </div>
         </article>
 
@@ -587,46 +690,28 @@
         <article class="card">
           <div class="img" style="background-image:url('f.png')"></div>
           <div class="content">
-            <h3 class="name">Waxed Candle Wicks with Base
-10cm-</h3>
-            <div class="price">$2.75</div>
-          </div>
-          <div class="btnrow">
-            <button class="btn  add-to-cart" type="button"
-              data-id="fennels" data-name="Waxed Candle Wicks with Base - 10cm" data-price="2.75" data-img="f.png">
-              Add to cart
-         
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="img" style="background-image:url('f.png')"></div>
-          <div class="content">
-            <h3 class="name">Waxed Candle Wicks with Base
-15cm-</h3>
+            <h3 class="name">Waxed Candle Wicks with Base (15cm)</h3>
             <div class="price">$3.00</div>
           </div>
           <div class="btnrow">
-            <button class="btn  add-to-cart" type="button"
-              data-id="fennels" data-name="Waxed Candle Wicks with Base - 15cm" data-price="3.00" data-img="f.png">
+            <button class="btn add-to-cart" type="button"
+              data-id="waxed-wick-15cm" data-name="Waxed Candle Wicks with Base (15cm)" data-price="3.00" data-img="f.png">
               Add to cart
-         
+            </button>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-<!-- FOOTER -->
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="foot">
         <div>
-          <div class="brand" style="margin-bottom:8px">
-            <span class="logo" aria-hidden="true"></span>
-            <span>
-              <span style="display:block;font-weight:800;color:#fff">The Candle Studio</span>
-              <small style="color:rgba(255,255,255,.75)">Candle Making Supplies</small>
+          <div class="brand" style="margin-bottom:8px;max-width:520px;">
+            <span class="logo-wrap" aria-hidden="true" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);box-shadow:none;">
+              <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
             </span>
           </div>
           <p>
@@ -746,6 +831,15 @@
       emptyStateEl.style.display = cart.length ? "none" : "block";
     }
 
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
     function renderCart(){
       cartItemsEl.innerHTML = "";
 
@@ -784,7 +878,6 @@
       overlay.classList.add("open");
       drawer.classList.add("open");
       overlay.setAttribute("aria-hidden", "false");
-      // focus close button for accessibility
       setTimeout(() => closeCartBtn.focus(), 50);
     }
 
@@ -826,18 +919,7 @@
       renderCart();
     }
 
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    // -----------------------
     // Events
-    // -----------------------
     openCartBtn.addEventListener("click", () => openCart());
     closeCartBtn.addEventListener("click", () => closeCart());
     overlay.addEventListener("click", () => closeCart());
@@ -854,7 +936,7 @@
           price: btn.dataset.price,
           img: btn.dataset.img
         });
-        openCart(); // open cart after adding
+        openCart();
       });
     });
 
@@ -880,22 +962,16 @@
     });
 
     checkoutBtn.addEventListener("click", () => {
-  if (!cart.length) {
-    alert("Your cart is empty.");
-    return;
-  }
+      if (!cart.length) {
+        alert("Your cart is empty.");
+        return;
+      }
+      const note = document.getElementById("orderNote").value.trim();
+      localStorage.setItem("tcs_order_note", note);
+      window.location.href = "cart.html";
+    });
 
-  // (optional) save the note so cart.html can read it if you want
-  const note = document.getElementById("orderNote").value.trim();
-  localStorage.setItem("tcs_order_note", note);
-
-  // Go to the cart page
-  window.location.href = "cart.html";
-});
-
-    // -----------------------
     // Init
-    // -----------------------
     loadCart();
     renderCart();
   </script>
