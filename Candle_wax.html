@@ -9,6 +9,7 @@
 
   <style>
     :root{
+      --serif: Georgia;
       --rose:#97495a;
       --blush:#f6cbcc;
       --navy:#344F6F;
@@ -82,21 +83,21 @@
       min-width:0;
     }
     .logo-wrap{
-      width:200px;
-      height:150px;
+      width:180px;
+      height:64px;
       border-radius:16px;
-      background:0;
+      background:transparent;
       border:0;
-      box-shadow:0;
+      box-shadow:none;
       display:flex;
-      align-items:left;
-      justify-content:left;
+      align-items:center;
+      justify-content:flex-start;
       flex:0 0 auto;
       overflow:hidden;
     }
     .logo-img{
-      width:200px;
-      height:150px;
+      width:100%;
+      height:100%;
       object-fit:contain;
       display:block;
     }
@@ -547,7 +548,16 @@
       .foot{grid-template-columns: 1fr; gap:14px}
     }
 
-    @media (prefers-reduced-motion: reduce){
+    
+    /* ✅ Logo responsive */
+    @media (max-width: 900px){
+      .logo-wrap{width:160px; height:56px;}
+    }
+    @media (max-width: 560px){
+      .logo-wrap{width:140px; height:52px;}
+    }
+
+@media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
     }
   </style>
@@ -558,17 +568,15 @@
     <div class="container nav">
       <a class="brand" href="index.html" aria-label="Go to home">
         <span class="logo-wrap" aria-hidden="true">
-          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+          <img src="./logo.png" alt="The Candle Studio Logo" class="logo-img">
         </span>
-      
       </a>
-      </div>
 
       <div class="nav-actions">
-        <a class="pill" href="index.html">← Back</a>
+        <a class="pill" href="index.html">← Back to Home</a>
 
         <button class="pill" id="openCartBtn" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
-          🛒 Cart <span class="cart-count" id="cartCount">0</span>
+          🛒 View Cart <span class="cart-count" id="cartCount">0</span>
         </button>
       </div>
     </div>

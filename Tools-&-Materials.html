@@ -64,24 +64,25 @@
       color:var(--navy);
       min-width:auto;
       flex:1 1 auto;
-      max-width:520px;
+      max-width:420px;
     }
     .logo-wrap{
-      width:200px;
-      height:150px;
+      width:auto;
+      height:64px;
       border-radius:16px;
-      background:0;
+      background:transparent;
       border:0;
-      box-shadow:0;
+      box-shadow:none;
       display:flex;
-      align-items:left;
-      justify-content:left;
+      align-items:center;
+      justify-content:flex-start;
       flex:0 0 auto;
-      overflow:hidden;
+      overflow:visible;
     }
     .logo-img{
-      width:200px;
-      height:150px;
+      height:64px;
+      width:auto;
+      max-width:220px;
       object-fit:contain;
       display:block;
     }
@@ -529,7 +530,8 @@
       .card{grid-column: span 6;}
       .hero h1{font-size:36px}
       .sort{min-width:0; width:100%;}
-      .logo-wrap{height:56px}
+      .logo-wrap{height:56px;width:auto}
+      .logo-img{height:56px;width:auto;max-width:200px}
       .brand{max-width:420px}
     }
 
@@ -577,7 +579,7 @@
     <div class="container nav">
       <a class="brand" href="index.html" aria-label="Go to home">
         <span class="logo-wrap" aria-hidden="true">
-          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+          <img src="./logo.png" alt="The Candle Studio Logo" class="logo-img" loading="eager" />
         </span>
       
       </a>
