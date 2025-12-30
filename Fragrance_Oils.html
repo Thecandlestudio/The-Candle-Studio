@@ -33,8 +33,6 @@
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
-
-      /* ✅ iPhone notch/home-bar safe area */
       padding-bottom: env(safe-area-inset-bottom);
     }
     a{color:inherit;text-decoration:none}
@@ -46,14 +44,12 @@
       background:rgba(246,203,204,.75);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
-      padding-top: env(safe-area-inset-top); /* ✅ notch safe */
+      padding-top: env(safe-area-inset-top);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
     }
-
-    /* ✅ Logo-only brand (big, wide) */
     .brand{
       display:flex;
       align-items:center;
@@ -83,7 +79,6 @@
       display:block;
       padding:6px 10px;
     }
-
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
 
     .pill{
@@ -118,21 +113,9 @@
       line-height:1;
     }
 
-    /* ✅ Page title block inside header (kept) */
-    header .page-title{
-      padding:6px 0 14px;
-    }
-    .section-title{
-      margin:0 0 6px;
-      font-size:22px;
-      color:var(--navy);
-    }
-    .lead{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      max-width:85ch;
-    }
+    header .page-title{ padding:6px 0 14px; }
+    .section-title{ margin:0 0 6px; font-size:22px; color:var(--navy); }
+    .lead{ margin:0; color:var(--muted); line-height:1.6; max-width:85ch; }
 
     /* ---------- LAYOUT ---------- */
     .page{
@@ -143,11 +126,7 @@
       align-items:start;
     }
 
-    .sidebar{
-      position:sticky;
-      top:92px;
-      align-self:start;
-    }
+    .sidebar{ position:sticky; top:92px; align-self:start; }
     .side-card{
       background:rgba(255,255,255,.7);
       border:1px solid var(--line);
@@ -155,25 +134,9 @@
       box-shadow:var(--shadow);
       padding:16px;
     }
-    .side-title{
-      margin:0 0 12px;
-      color:var(--navy);
-      font-weight:900;
-      font-size:22px;
-      line-height:1.1;
-    }
-    .side-sub{
-      margin:16px 0 10px;
-      color:var(--navy);
-      font-weight:900;
-      font-size:18px;
-      line-height:1.2;
-    }
-    .filters{
-      display:grid;
-      gap:12px;
-      margin-top:8px;
-    }
+    .side-title{ margin:0 0 12px; color:var(--navy); font-weight:900; font-size:22px; line-height:1.1; }
+    .side-sub{ margin:16px 0 10px; color:var(--navy); font-weight:900; font-size:18px; line-height:1.2; }
+    .filters{ display:grid; gap:12px; margin-top:8px; }
     .filter{
       display:flex;
       align-items:center;
@@ -183,23 +146,9 @@
       font-weight:700;
       font-size:15px;
     }
-    .filter label{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      cursor:pointer;
-    }
-    .filter input[type="radio"]{
-      width:18px;height:18px;
-      accent-color: var(--navy);
-      cursor:pointer;
-    }
-    .badge-count{
-      color:rgba(52,79,111,.65);
-      font-weight:800;
-      min-width:44px;
-      text-align:right;
-    }
+    .filter label{ display:flex; align-items:center; gap:10px; cursor:pointer; }
+    .filter input[type="radio"]{ width:18px;height:18px; accent-color: var(--navy); cursor:pointer; }
+    .badge-count{ color:rgba(52,79,111,.65); font-weight:800; min-width:44px; text-align:right; }
 
     .toprow{
       display:flex;
@@ -209,16 +158,9 @@
       flex-wrap:wrap;
       margin-bottom:12px;
     }
-    .countline{
-      color:rgba(52,79,111,.78);
-      font-weight:700;
-    }
-    .top-controls{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-    }
+    .countline{ color:rgba(52,79,111,.78); font-weight:700; }
+    .top-controls{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+
     .searchbox{
       display:flex;
       align-items:center;
@@ -240,6 +182,7 @@
       font-weight:700;
     }
     .searchbox input::placeholder{color:rgba(52,79,111,.55)}
+
     .sort{
       display:flex;
       align-items:center;
@@ -264,7 +207,6 @@
       cursor:pointer;
     }
 
-    /* ✅ nice focus ring on mobile */
     .pill:focus-visible,
     .searchbox:focus-within,
     .sort:focus-within,
@@ -286,14 +228,11 @@
       grid-column: span 3;
       background:var(--card);
       border:1px solid rgba(52,79,111,.22);
-
-      /* ✅ bring back softness */
       border-radius:18px;
       overflow:hidden;
       box-shadow:var(--shadow);
     }
 
-    /* ✅ better image fit */
     .img{
       height:210px;
       background:linear-gradient(135deg, rgba(176,160,186,.35), rgba(246,203,204,.35));
@@ -316,7 +255,7 @@
     .body{ padding:14px 14px 10px; }
     .name{
       margin:0;
-      font-size:24px;           /* ✅ less huge on desktop too */
+      font-size:24px;
       line-height:1.1;
       font-weight:900;
       color:#111827;
@@ -337,33 +276,16 @@
       font-weight:800;
     }
 
+    /* ✅ FIXED: actions row works on desktop + phone */
     .actions{
       padding:12px 14px 14px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      gap:10px;
+      flex-wrap:nowrap;
     }
-  .select-btn{
-  padding:8px 10px;          /* smaller padding */
-  border-radius:12px;
-  border:2px solid rgba(52,79,111,.75);
-  background:#fff;
-  color:#111827;
-  font-weight:900;
-  font-size:11px;            /* smaller text */
-  text-transform:uppercase;
-  letter-spacing:.03em;
-  cursor:pointer;
-
-  min-width:0;               /* IMPORTANT: removes forced width */
-  width:auto;                /* button sizes to its content */
-  flex:0 0 auto;             /* prevents stretching */
-  line-height:1.1;
-  white-space:nowrap;        /* keeps text on one line */
-}
-    .select-btn:hover{background:rgba(246,203,204,.18)}
     .qty{
+      flex:0 0 64px;              /* fixed width so it doesn't stretch */
       width:64px;
       height:48px;
       border:1px solid rgba(52,79,111,.22);
@@ -376,6 +298,30 @@
       background:#fff;
       -webkit-tap-highlight-color: transparent;
     }
+    .select-btn{
+      margin-left:auto;            /* pushes button to the right */
+      flex:1 1 auto;               /* allow shrink/grow */
+      min-width:0;                 /* IMPORTANT: allows shrinking in flex */
+      max-width:160px;             /* keeps it from looking huge on desktop */
+      width:auto;
+
+      padding:8px 10px;
+      border-radius:12px;
+      border:2px solid rgba(52,79,111,.75);
+      background:#fff;
+      color:#111827;
+      font-weight:900;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+      cursor:pointer;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .select-btn:hover{background:rgba(246,203,204,.18)}
 
     .options{
       padding:0 14px 14px;
@@ -481,7 +427,7 @@
       padding:12px 14px;
       overflow:auto;
       flex:1;
-      -webkit-overflow-scrolling: touch; /* ✅ iOS smooth */
+      -webkit-overflow-scrolling: touch;
     }
     .empty{
       border:1px dashed rgba(52,79,111,.35);
@@ -538,7 +484,7 @@
       border-top:1px solid var(--line);
       padding:12px 14px 14px;
       background:rgba(176,160,186,.14);
-      padding-bottom: calc(14px + env(safe-area-inset-bottom)); /* ✅ home-bar safe */
+      padding-bottom: calc(14px + env(safe-area-inset-bottom));
     }
     .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0;color:var(--navy);font-weight:900;}
     .row small{font-weight:700;color:rgba(52,79,111,.75)}
@@ -562,30 +508,22 @@
       padding:34px 0 26px;
       margin-top:10px;
     }
-    .foot{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr 1fr;
-      gap:18px;
-    }
+    .foot{ display:grid; grid-template-columns: 1.2fr .8fr 1fr; gap:18px; }
     .foot p{margin:10px 0 0;color:rgba(255,255,255,.78);line-height:1.7;font-weight:600}
     .foot h3{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.92);font-weight:900;}
     .foot a{display:block;color:rgba(255,255,255,.78);padding:6px 0;font-weight:700}
     .foot a:hover{color:#fff}
     .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700}
 
-    /* ✅ Touch devices: avoid hover “sticking” */
     @media (hover:none){
       .pill:hover{background:rgba(255,255,255,.65)}
       .select-btn:hover{background:#fff}
       .add-btn:hover{filter:none}
     }
 
-    /* ✅ Mobile polish */
     @media (max-width: 980px){
       .page{grid-template-columns:1fr}
       .sidebar{position:static}
-
-      /* ✅ sidebar becomes “top filter card” */
       .side-card{padding:14px}
       .card{grid-column: span 6}
       .name{font-size:22px}
@@ -596,28 +534,31 @@
     @media (max-width: 560px){
       .page{padding:16px 0 22px; gap:14px}
 
-      /* ✅ header controls wrap nicely */
       .nav{gap:10px}
       .nav-actions{gap:8px}
       .pill{padding:10px 12px;font-size:13px}
 
-      /* ✅ Search/sort full width */
       .searchbox{min-width:0;width:100%}
       .sort{min-width:0;width:100%}
 
-      /* ✅ 1 column cards */
       .grid{gap:12px}
       .card{grid-column: span 12}
       .img{height:190px}
 
-      /* ✅ options area buttons stack full width */
       .options{gap:10px}
       .size{flex:1 1 100%}
       .mini{flex:1 1 100%}
       .add-btn{width:100%}
+
+      /* ✅ phone layout: stack nicely */
       .actions{flex-wrap:wrap}
-      .qty{width:100%; height:46px}
-      .select-btn{width:100%}
+      .qty{flex:1 1 100%; width:100%; height:46px}
+      .select-btn{
+        flex:1 1 100%;
+        max-width:100%;
+        width:100%;
+        margin-left:0;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -667,7 +608,6 @@
 <body>
   <header>
     <div class="container nav">
-      <!-- ✅ Logo only -->
       <a class="brand" href="index.html" aria-label="Go to home">
         <span class="logo-wrap" aria-hidden="true">
           <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
@@ -724,7 +664,6 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="foot">
@@ -798,7 +737,6 @@
     </div>
   </aside>
 
-  <!-- ✅ Added-to-cart toast -->
   <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
     <div class="toast-img" id="toastImg"></div>
     <div class="toast-text" id="toastText">Added to cart</div>
@@ -886,7 +824,6 @@
     const cartItemsEl = $("#cartItems");
     const emptyStateEl = $("#emptyState");
 
-    // toast
     const toast = $("#toast");
     const toastImg = $("#toastImg");
     const toastText = $("#toastText");
