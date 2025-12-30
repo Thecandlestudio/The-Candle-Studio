@@ -30,16 +30,19 @@
     }
 
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
     body{
       margin:0;
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
+      -webkit-text-size-adjust:100%;
+      text-rendering:optimizeLegibility;
     }
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    /* ===== HEADER (match Home page button style) ===== */
+    /* ===== HEADER ===== */
     header{
       position:sticky; top:0; z-index:60;
       background:rgba(255,255,255,.78);
@@ -57,6 +60,7 @@
       font-weight:800; color:var(--navy);
       letter-spacing:.2px;
       min-width:220px;
+      min-height:44px; /* ✅ better tap target */
     }
     .logo{
       width:38px;height:38px;border-radius:14px;
@@ -74,7 +78,7 @@
 
     .nav-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
     .pill{
-      padding:9px 12px;
+      padding:10px 12px;
       border-radius:999px;
       border:1px solid rgba(52,79,111,.18);
       background:rgba(255,255,255,.65);
@@ -86,6 +90,9 @@
       gap:8px;
       cursor:pointer;
       line-height:1;
+      min-height:44px; /* ✅ tap target */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     .pill:hover{background:rgba(255,255,255,.9)}
     .count{
@@ -113,6 +120,9 @@
       border-radius:999px;
       cursor:pointer;
       font-weight:800;
+      min-height:44px; /* ✅ tap target */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     .menu-btn:hover{background:rgba(246,203,204,.22)}
 
@@ -129,6 +139,9 @@
       border:1px solid transparent;
       background:transparent;
       cursor:pointer;
+      min-height:44px; /* ✅ tap target */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     nav .link:hover{
       border-color:rgba(52,79,111,.18);
@@ -151,11 +164,13 @@
       display:flex;
       justify-content:space-between;
       gap:10px;
-      padding:10px 10px;
+      padding:12px 12px; /* ✅ bigger tap */
       border-radius:12px;
       color:var(--navy);
       font-size:13px;
       font-weight:700;
+      min-height:44px;
+      align-items:center;
     }
     .dropdown a:hover{
       background:rgba(246,203,204,.22);
@@ -163,7 +178,7 @@
     }
     .item.open > .dropdown{display:block}
 
-    /* Search (header style like Home) */
+    /* Search */
     .search{
       display:flex;align-items:center;gap:10px;
       border:1px solid rgba(52,79,111,.18);
@@ -172,6 +187,7 @@
       padding:10px 12px;
       min-width:260px;
       color:var(--navy);
+      min-height:44px; /* ✅ tap target */
     }
     .search input{
       width:100%;
@@ -184,7 +200,7 @@
     }
     .search input::placeholder{color:rgba(52,79,111,.55)}
 
-    /* Search dropdown results (small panel under header search) */
+    /* Search dropdown results */
     .results{
       position:absolute;
       right:0;
@@ -211,12 +227,16 @@
       display:flex;
       justify-content:space-between;
       gap:10px;
-      padding:10px 10px;
+      padding:12px 12px; /* ✅ bigger tap */
       border-radius:12px;
       background:rgba(255,255,255,.75);
       border:1px solid rgba(52,79,111,.10);
       margin-bottom:8px;
       cursor:pointer;
+      min-height:48px;
+      align-items:center;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     .res-item:hover{background:#fff}
     .res-item strong{font-weight:900;color:var(--navy);font-size:13px}
@@ -233,12 +253,14 @@
       overflow:hidden;
       background:#111;
       border-bottom:1px solid rgba(52,79,111,.14);
+
+      /* ✅ mobile viewport stability */
+      min-height: min(520px, 92svh);
     }
     .hero::before{
       content:"";
       position:absolute; inset:0;
-      background:
-        url("b.png") center/cover no-repeat;
+      background:url("b.png") center/cover no-repeat;
       filter:saturate(.95) contrast(1.05);
       transform:scale(1.02);
     }
@@ -372,7 +394,7 @@
       font-size:13px;
     }
 
-    /* Footer (same as your Home page) */
+    /* Footer */
     footer{
       border-top:1px solid rgba(52,79,111,.14);
       background:linear-gradient(180deg, rgba(52,79,111,.92), rgba(52,79,111,.98));
@@ -401,13 +423,24 @@
     .foot a:hover{color:#fff}
     .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
 
+    /* ✅ Focus styles (mobile + accessibility) */
+    :focus-visible{
+      outline:3px solid rgba(151,73,90,.45);
+      outline-offset:3px;
+      border-radius:14px;
+    }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 980px){
       .content{grid-template-columns:1fr}
+
+      /* ✅ keep search hidden on tablet/mobile as you had */
       .search{display:none}
+
       .menu-btn{display:inline-flex}
       nav ul{display:none}
+
+      /* ✅ mobile nav panel polish */
       nav.open ul{
         display:flex;
         flex-direction:column;
@@ -420,15 +453,63 @@
         width:min(360px, 92vw);
         box-shadow:var(--shadow);
         z-index:30;
+        max-height:70vh;
+        overflow:auto;
+        -webkit-overflow-scrolling:touch;
       }
-      .dropdown{position:static;display:none;box-shadow:none;margin-top:6px}
+
+      /* ✅ make mobile menu links full-width */
+      nav.open .link{
+        width:100%;
+        justify-content:space-between;
+        border-color:rgba(52,79,111,.12);
+        background:rgba(246,203,204,.10);
+      }
+
+      .dropdown{
+        position:static;
+        display:none;
+        box-shadow:none;
+        margin-top:6px;
+        border-radius:14px;
+      }
       .item.open > .dropdown{display:block}
+
       .hero{min-height:420px}
       .hero h1{font-size:44px}
       .hero p{font-size:18px}
     }
+
+    @media (max-width: 700px){
+      /* ✅ header spacing + prevent cramped wrap */
+      .nav{padding:12px 0}
+      .nav-right{gap:8px}
+      .brand{min-width:auto}
+      .pill{padding:10px 12px}
+    }
+
     @media (max-width: 560px){
       .hero h1{font-size:38px}
+      .hero p{font-size:16px}
+
+      /* ✅ softer card typography for small screens */
+      .card .head h2{font-size:28px}
+      .story{font-size:15px; line-height:1.85}
+      .callout{font-size:14px}
+
+      /* ✅ footer becomes 1 column */
+      .foot{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 380px){
+      .hero h1{font-size:34px}
+      .pill{font-size:12px}
+    }
+
+    /* ✅ Reduce motion if user prefers */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{transition:none !important; animation:none !important}
     }
   </style>
 </head>
@@ -445,10 +526,8 @@
       </a>
 
       <div class="nav-right">
-        <!-- Back to Home (pill, like Home page style) -->
         <a class="pill" href="index.html">← Back to Home</a>
 
-        <!-- Header search (pill style, searches pages + keywords) -->
         <div style="position:relative">
           <div class="search" aria-label="Search the website">
             🔎 <input id="siteSearch" type="search" placeholder="Search the website..." />
@@ -460,19 +539,16 @@
           </div>
         </div>
 
-        <!-- Cart -->
         <a class="pill" href="cart.html" aria-label="Cart">
           🛒 Cart <span class="count" id="cartBadge">0</span>
         </a>
 
-        <!-- Mobile menu button (same as Home page) -->
-        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu">☰ Menu</button>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">☰ Menu</button>
 
-        <!-- Desktop nav (same style as Home page) -->
         <nav id="nav" aria-label="Main navigation">
           <ul>
             <li class="item">
-              <button class="link" type="button" data-dd="true">All Products ▾</button>
+              <button class="link" type="button" data-dd="true" aria-expanded="false">All Products ▾</button>
               <div class="dropdown" role="menu" aria-label="All products menu">
                 <a href="Candle_wax.html">Candle Wax</a>
                 <a href="Molds.html">Candle Molds</a>
@@ -502,7 +578,6 @@
 
   <main>
     <div class="container content">
-      <!-- Story -->
       <section class="card" aria-label="Our story">
         <div class="head">
           <h2>Our Story</h2>
@@ -522,7 +597,6 @@
         </div>
       </section>
 
-      <!-- Values -->
       <aside class="card" aria-label="What we stand for">
         <div class="head">
           <h2>What We Believe</h2>
@@ -557,10 +631,6 @@
     </div>
   </main>
 
-
-
-
-<!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="foot">
@@ -583,7 +653,7 @@
         <div>
           <h3>Quick Links</h3>
           <a href="About.html">About</a>
-          <a href="contact.html">Contact Us</a>
+          <a href="Contact_us.html">Contact Us</a>
           <a href="index.html">Home</a>
         </div>
 
@@ -600,8 +670,6 @@
       <div class="copy">Copyright © <span id="year"></span> | The Candle Studio</div>
     </div>
   </footer>
-
-
 
   <script>
     // Year
@@ -621,29 +689,59 @@
     }
     document.getElementById("cartBadge").textContent = String(getCartCount());
 
-    // Mobile menu
+    // Mobile menu (✅ close on outside click + ESC)
     const menuBtn = document.getElementById("menuBtn");
     const nav = document.getElementById("nav");
-    menuBtn?.addEventListener("click", () => nav.classList.toggle("open"));
 
-    // Dropdown (desktop)
+    function setMenu(open){
+      nav.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      if(!open){
+        // close any dropdown when closing menu
+        document.querySelectorAll(".item.open").forEach(el => el.classList.remove("open"));
+        document.querySelectorAll('[data-dd="true"][aria-expanded="true"]').forEach(btn => btn.setAttribute("aria-expanded","false"));
+      }
+    }
+
+    menuBtn?.addEventListener("click", () => {
+      const open = !nav.classList.contains("open");
+      setMenu(open);
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedMenuBtn = e.target.closest("#menuBtn");
+      const clickedInsideNav = e.target.closest("nav");
+      if (!clickedInsideNav && !clickedMenuBtn) setMenu(false);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") setMenu(false);
+    });
+
+    // Dropdown (desktop + mobile)
     document.addEventListener("click", (e) => {
       const ddBtn = e.target.closest('[data-dd="true"]');
       const clickedInsideNav = e.target.closest("nav");
       if (!clickedInsideNav) {
         document.querySelectorAll(".item.open").forEach(el => el.classList.remove("open"));
+        document.querySelectorAll('[data-dd="true"][aria-expanded="true"]').forEach(btn => btn.setAttribute("aria-expanded","false"));
         return;
       }
       if (ddBtn) {
         const item = ddBtn.closest(".item");
+        const isOpen = item.classList.contains("open");
         document.querySelectorAll(".item.open").forEach(el => { if (el !== item) el.classList.remove("open"); });
-        item.classList.toggle("open");
+        item.classList.toggle("open", !isOpen);
+
+        // aria-expanded
+        document.querySelectorAll('[data-dd="true"]').forEach(btn => btn.setAttribute("aria-expanded","false"));
+        ddBtn.setAttribute("aria-expanded", (!isOpen) ? "true" : "false");
       }
     });
 
     // ===== Site search (search pages + keywords) =====
     const PAGES = [
-      { title:"Home", url:"The Candle Studio.html", tags:["home","main"] },
+      { title:"Home", url:"index.html", tags:["home","main"] },
       { title:"About", url:"About.html", tags:["about","story","lebanon"] },
       { title:"Cart", url:"cart.html", tags:["cart","checkout","order"] },
       { title:"Candle Wax", url:"Candle_wax.html", tags:["wax","soy","paraffin","beeswax","gel"] },
@@ -653,7 +751,7 @@
       { title:"Jars & Containers", url:"Jars.html", tags:["jars","containers","glass"] },
       { title:"Jesmonite", url:"Jesmonite.html", tags:["jesmonite"] },
       { title:"Tools", url:"Materials_Tools.html", tags:["tools","equipment","scale","thermometer"] },
-      { title:"Wicks & Accessories", url:"Tools%20%26%20Materials.html", tags:["wicks","cotton","wood wick","tabs"] }
+      { title:"Wicks & Accessories", url:"Tools-&-Materials.html", tags:["wicks","cotton","wood wick","tabs"] }
     ];
 
     const searchInput = document.getElementById("siteSearch");

@@ -25,35 +25,56 @@
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
+      padding-bottom: env(safe-area-inset-bottom);
     }
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--max);margin:0 auto;padding:0 16px}
 
+    /* ✅ Modern logo-only header */
     header{
       position:sticky; top:0; z-index:50;
       background:rgba(246,203,204,.75);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; color:var(--navy);
+      display:flex;
+      align-items:center;
+      flex:1 1 auto;
+      max-width:520px;
+      min-width:0;
     }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:linear-gradient(135deg,var(--rose),var(--lav));
-      box-shadow:0 10px 22px rgba(151,73,90,.22);
-      flex:0 0 auto;
+    .logo-wrap{
+      width:100%;
+      height:52px;
+      border-radius:16px;
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(52,79,111,.18);
+      box-shadow:0 10px 22px rgba(52,79,111,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
     }
+    .logo-img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      padding:6px 10px;
+    }
+
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .pill{
       padding:9px 12px;
@@ -61,12 +82,14 @@
       border:1px solid var(--line);
       background:rgba(255,255,255,.65);
       color:var(--navy);
-      font-weight:700;
+      font-weight:800;
       font-size:13px;
       display:inline-flex;
       align-items:center;
       gap:8px;
       cursor:pointer;
+      box-shadow:0 10px 22px rgba(52,79,111,.08);
+      -webkit-tap-highlight-color: transparent;
     }
     .pill:hover{background:rgba(255,255,255,.9)}
     .count{
@@ -83,6 +106,15 @@
       font-weight:900;
       font-size:12px;
       line-height:1;
+    }
+
+    .pill:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 4px rgba(151,73,90,.16);
+      border-color: rgba(151,73,90,.45);
     }
 
     .hero{
@@ -130,7 +162,7 @@
     .card .head h2{
       margin:0;
       font-size:16px;
-      font-weight:900;
+      font-weight:1000;
       color:var(--navy);
       letter-spacing:.02em;
     }
@@ -171,7 +203,7 @@
     }
     .pname{
       margin:0;
-      font-weight:900;
+      font-weight:1000;
       color:var(--navy);
       line-height:1.2;
     }
@@ -183,7 +215,7 @@
     }
 
     .money{
-      font-weight:900;
+      font-weight:1000;
       color:var(--rose);
       white-space:nowrap;
     }
@@ -201,15 +233,16 @@
       border:0;
       background:rgba(176,160,186,.22);
       color:var(--navy);
-      font-weight:900;
+      font-weight:1000;
       padding:8px 10px;
       cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .qty button:hover{background:rgba(176,160,186,.35)}
     .qty span{
       min-width:34px;
       text-align:center;
-      font-weight:900;
+      font-weight:1000;
       color:var(--navy);
       padding:0 10px;
     }
@@ -218,17 +251,18 @@
       border:0;
       background:transparent;
       color:rgba(52,79,111,.8);
-      font-weight:900;
+      font-weight:1000;
       cursor:pointer;
       text-decoration:underline;
       padding:6px 0;
+      -webkit-tap-highlight-color: transparent;
     }
     .remove:hover{color:var(--rose)}
 
     .empty{
       padding:16px;
       color:var(--muted);
-      font-weight:800;
+      font-weight:900;
     }
     .empty a{
       text-decoration:underline;
@@ -243,7 +277,7 @@
       gap:10px;
       margin:10px 0;
       color:var(--navy);
-      font-weight:800;
+      font-weight:900;
     }
     .row small{
       font-weight:700;
@@ -258,7 +292,7 @@
     .note-label{
       display:block;
       margin-top:12px;
-      font-weight:900;
+      font-weight:1000;
       color:var(--navy);
       font-size:12px;
       letter-spacing:.06em;
@@ -285,11 +319,12 @@
       border:2px solid rgba(52,79,111,.55);
       background:#fff;
       color:var(--navy);
-      font-weight:900;
+      font-weight:1000;
       letter-spacing:.02em;
       font-size:13px;
       text-transform:uppercase;
       cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn:hover{
       background:rgba(246,203,204,.35);
@@ -305,7 +340,6 @@
       background:linear-gradient(135deg, rgba(151,73,90,.25), rgba(246,203,204,.9));
     }
 
-    /* ✅ Delivery select styling (matches your UI) */
     .select{
       width:100%;
       margin-top:8px;
@@ -314,9 +348,10 @@
       border:1px solid rgba(52,79,111,.25);
       outline:none;
       font-family:inherit;
-      font-weight:800;
+      font-weight:900;
       color:var(--navy);
       background:rgba(255,255,255,.85);
+      cursor:pointer;
     }
 
     /* Footer */
@@ -332,9 +367,7 @@
       grid-template-columns: 1.2fr .8fr 1fr;
       gap:18px;
     }
-    .foot .brand{color:#fff}
-    .foot .brand small{color:rgba(255,255,255,.75)}
-    .foot p{margin:10px 0 0;color:rgba(255,255,255,.78);line-height:1.7;font-weight:600;font-family:'Poppins',sans-serif}
+    .foot p{margin:10px 0 0;color:rgba(255,255,255,.78);line-height:1.7;font-weight:600}
     .foot h3{
       margin:0 0 10px;
       font-size:12px;
@@ -342,11 +375,17 @@
       letter-spacing:.14em;
       color:rgba(255,255,255,.92);
       font-weight:900;
-      font-family:'Poppins',sans-serif;
     }
-    .foot a{display:block;color:rgba(255,255,255,.78);padding:6px 0;font-weight:700;font-family:'Poppins',sans-serif}
+    .foot a{display:block;color:rgba(255,255,255,.78);padding:6px 0;font-weight:700}
     .foot a:hover{color:#fff}
-    .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
+    .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700}
+
+    @media (hover:none){
+      .pill:hover{background:rgba(255,255,255,.65)}
+      .btn:hover{background:#fff; border-color:rgba(52,79,111,.55)}
+      .btn.checkout:hover{background:linear-gradient(135deg, rgba(151,73,90,.18), rgba(246,203,204,.75))}
+      .qty button:hover{background:rgba(176,160,186,.22)}
+    }
 
     @media (max-width: 950px){
       .layout{grid-template-columns:1fr}
@@ -355,6 +394,11 @@
       .table th:nth-child(2),
       .table td:nth-child(2){display:none;}
       .prod{min-width:auto}
+      .pill{padding:10px 12px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; scroll-behavior:auto !important;}
     }
   </style>
 </head>
@@ -362,13 +406,12 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <div style="line-height:1.1">The Candle Studio</div>
-          <div style="font-size:12px;font-weight:700;color:rgba(52,79,111,.75)">Shopping Cart</div>
-        </div>
-      </div>
+      <!-- ✅ Logo only -->
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="logo-wrap" aria-hidden="true">
+          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+        </span>
+      </a>
 
       <div class="nav-actions">
         <button class="pill" id="continueShoppingBtn" type="button">← Continue Shopping</button>
@@ -410,14 +453,12 @@
         <div class="sum">
           <div class="row"><small>Items</small> <span id="itemsCount">0</span></div>
 
-          <!-- ✅ Delivery method with fees -->
           <label class="note-label" for="deliveryMethod">Delivery Method</label>
           <select id="deliveryMethod" class="select" aria-label="Delivery Method">
             <option value="Beirut Area">Beirut Area (+$3)</option>
             <option value="Outside Beirut">Outside Beirut (+$4)</option>
           </select>
 
-          <!-- ✅ Total (Products + Delivery) -->
           <div class="row"><small>Total</small> <span class="total" id="subtotal">$0.00</span></div>
 
           <label class="note-label" for="note">Order note (optional)</label>
@@ -434,12 +475,10 @@
     <div class="container">
       <div class="foot">
         <div>
-          <div class="brand" style="margin-bottom:8px">
-            <span class="logo" aria-hidden="true"></span>
-            <span>
-              <span style="display:block;font-weight:800;color:#fff">The Candle Studio</span>
-              <small style="color:rgba(255,255,255,.75)">Candle Making Supplies</small>
-            </span>
+          <div style="max-width:520px;margin-bottom:8px;">
+            <div class="logo-wrap" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);box-shadow:none;">
+              <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+            </div>
           </div>
           <p>
             The Candle Studio supplies high-quality candle-making materials for hobbyists, small businesses, and wholesalers alike.
@@ -474,15 +513,11 @@
     const GOOGLE_FORM_BASE =
       "https://docs.google.com/forms/d/e/1FAIpQLSf7R8XrKpV-MHfHcspS0JSeCQpxp_SumZLrqAZ0MIuWHjh75A/viewform?usp=pp_url";
 
-    // Existing entries in your form
     const ENTRY_ORDER_ITEMS = "entry.815040252";
     const ENTRY_ORDER_NOTE  = "entry.1751745976";
     const ENTRY_TOTAL       = "entry.1635440353";
-
-    // ✅ Delivery entry from your form (from your link: entry.1483676993=Beirut+Area)
     const ENTRY_DELIVERY_METHOD = "entry.1483676993";
 
-    // ✅ Delivery fees
     const DELIVERY_PRICES = {
       "Beirut Area": 3,
       "Outside Beirut": 4
@@ -492,12 +527,16 @@
       const params = new URLSearchParams();
       params.set(ENTRY_ORDER_ITEMS, itemsText);
       params.set(ENTRY_ORDER_NOTE, noteText);
-      params.set(ENTRY_TOTAL, String(totalNumber.toFixed(2)));
+      params.set(ENTRY_TOTAL, String(Number(totalNumber).toFixed(2)));
       params.set(ENTRY_DELIVERY_METHOD, deliveryMethod);
       return `${GOOGLE_FORM_BASE}&${params.toString()}`;
     }
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // ✅ set year AFTER footer exists
+    (function setYear(){
+      const y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
+    })();
 
     const CART_KEY = "tcs_cart_v1";
     let cart = [];
@@ -533,7 +572,6 @@
         .replaceAll("'","&#039;");
     }
 
-    // ✅ Totals now include delivery fee
     function totals(){
       const items = cart.reduce((sum, it) => sum + Number(it.qty || 0), 0);
       const subtotal = cart.reduce(
@@ -551,10 +589,7 @@
       subtotalEl.textContent = money(finalTotal);
     }
 
-    // ✅ helper: go back to previous page (no home fallback)
-    function goBackPrev(){
-      window.history.go(-1);
-    }
+    function goBackPrev(){ window.history.go(-1); }
 
     function render(){
       if(!cart.length){
@@ -658,7 +693,6 @@
       if(confirm("Clear all items from your cart?")) clearCart();
     });
 
-    // ✅ Update totals immediately when delivery changes
     deliverySelect.addEventListener("change", totals);
 
     checkoutBtn.addEventListener("click", () => {
@@ -677,14 +711,12 @@
 
       const noteText = document.getElementById("note").value.trim();
 
-      // ✅ subtotal of products
       const subtotal = cart.reduce(
         (sum, it) => sum + (Number(it.price) * Number(it.qty)),
         0
       );
 
-      // ✅ add delivery fee
-      const deliveryMethod = deliverySelect.value; // "Beirut Area" or "Outside Beirut"
+      const deliveryMethod = deliverySelect.value;
       const deliveryFee = DELIVERY_PRICES[deliveryMethod] || 0;
 
       const totalNumber = subtotal + deliveryFee;
