@@ -9,13 +9,11 @@
 
   <style>
     :root{
-      /* KEEP your palette */
       --rose:#97495a;
       --blush:#f6cbcc;
       --navy:#344F6F;
       --lav:#B0A0BA;
 
-      /* neutrals */
       --bg:#fff8f9;
       --card:#ffffff;
       --text:#1c2230;
@@ -27,7 +25,6 @@
 
       --btnShadow: 0 12px 26px rgba(52,79,111,.18);
 
-      /* ✅ serif font used in the About page */
       --serif: Georgia, "Times New Roman", serif;
     }
 
@@ -45,7 +42,6 @@
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    /* ✅ make headings serif */
     h1, h2, h3, .section-title, .prod-name{
       font-family: var(--serif);
       letter-spacing:.02em;
@@ -57,8 +53,6 @@
       background:rgba(255,255,255,.78);
       backdrop-filter: blur(10px);
       border-bottom:1px solid rgba(52,79,111,.14);
-
-      /* ✅ iPhone notch safe area */
       padding-top: env(safe-area-inset-top);
     }
     .nav{
@@ -67,7 +61,6 @@
       gap:14px;
     }
 
-    /* ✅ UPDATED brand layout (logo + text) */
     .brand{
       display:flex; align-items:center; gap:12px;
       font-weight:800; color:var(--navy);
@@ -75,7 +68,6 @@
       min-width:220px;
     }
 
-    /* ✅ modern logo container */
     .logo-wrap{
       width:46px;
       height:46px;
@@ -489,12 +481,8 @@
     .foot a:hover{color:#fff}
     .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
 
-    /* ✅ Sticky bottom bar on phones */
-    .mobile-bar{ display:none; }
-
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 980px){
-      /* existing */
       .welcome{grid-template-columns:1fr}
       .card{grid-column: span 6;}
       .cat-card{grid-column: span 6;}
@@ -519,79 +507,38 @@
       .foot{grid-template-columns:1fr}
       .hero h1{font-size:42px}
 
-      /* ✅ Mobile header spacing + easier taps */
       header .nav{ padding:10px 0; }
       .brand{ min-width:auto; }
       .cart-link{ padding:10px 12px; }
       .menu-btn{ padding:10px 14px; }
 
-      /* ✅ Mobile menu: bigger spacing */
-      nav.open ul{
-        gap:6px;
-        padding:12px;
-      }
+      nav.open ul{ gap:6px; padding:12px; }
       nav .link{
         width:100%;
         justify-content:space-between;
         padding:12px 14px;
         font-size:14px;
       }
-      .dropdown a{
-        padding:12px 12px;
-        font-size:14px;
-      }
-
-      /* ✅ Sticky bottom bar on phones */
-      .mobile-bar{
-        position:fixed;
-        left:12px; right:12px; bottom:12px;
-        display:flex;
-        gap:10px;
-        z-index:100;
-      }
-      .mobile-bar a{
-        flex:1;
-        text-align:center;
-        padding:14px 14px;
-        border-radius:16px;
-        font-weight:900;
-        border:1px solid rgba(52,79,111,.18);
-        background:#fff;
-        box-shadow: 0 14px 30px rgba(52,79,111,.18);
-        color:var(--navy);
-        font-family:'Poppins',sans-serif;
-      }
-      .mobile-bar a.primary{
-        background:var(--navy);
-        color:#fff;
-        border-color:transparent;
-      }
-
-      /* prevent sticky bar from covering footer content */
-      body{ padding-bottom: 88px; }
+      .dropdown a{ padding:12px 12px; font-size:14px; }
     }
 
-    /* ✅ Better phone layout + hero sizing */
     @media (max-width: 560px){
       .grid{ gap:12px; }
-      .card{ grid-column: span 12; }     /* 1 per row */
-      .cat-card{ grid-column: span 12; } /* 1 per row */
+      .card{ grid-column: span 12; }
+      .cat-card{ grid-column: span 12; }
 
       .hero{ padding:56px 0 34px; }
       .hero h1{ font-size:32px; }
       .hero h2{ font-size:15px; }
 
-      /* make hero buttons easier to tap */
       .btn{ width:100%; max-width:320px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER -->
   <header>
     <div class="container nav">
-      <!-- ✅ Logo + Brand Text (clickable to home) -->
       <a class="brand" href="index.html" aria-label="Go to home">
         <span class="logo-wrap" aria-hidden="true">
           <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
@@ -603,7 +550,6 @@
       </a>
 
       <div class="nav-right">
-        <!-- SEARCH -->
         <div class="search-wrap" role="search" aria-label="Search the website">
           <div class="search">
             🔎 <input id="siteSearch" type="search" placeholder="Search the website..." />
@@ -638,7 +584,6 @@
           </ul>
         </nav>
 
-        <!-- Cart -->
         <a class="cart-link" href="cart.html" aria-label="Cart" title="Cart">
           🛒 Cart <span class="cart-badge" id="cartBadge">0</span>
         </a>
@@ -646,7 +591,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero" aria-label="Hero">
     <div class="container hero-inner">
       <h1>The Candle Studio</h1>
@@ -658,7 +602,6 @@
     </div>
   </section>
 
-  <!-- WELCOME -->
   <section id="about">
     <div class="container welcome">
       <div>
@@ -677,7 +620,6 @@
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS -->
   <section id="featured">
     <div class="container">
       <h2 class="section-title">Our Featured Products</h2>
@@ -720,7 +662,6 @@
     </div>
   </section>
 
-  <!-- POPULAR CATEGORIES -->
   <section id="sale">
     <div class="container">
       <h2 class="section-title">Shop by Popular Categories</h2>
@@ -770,7 +711,6 @@
     </div>
   </section>
 
-  <!-- REVIEWS -->
   <section>
     <div class="container">
       <h2 class="section-title">Customers Reviews</h2>
@@ -791,7 +731,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer id="contact">
     <div class="container">
       <div class="foot">
@@ -835,9 +774,7 @@
     </div>
   </footer>
 
-
   <script>
-    // ✅ Cart badge (shared cart localStorage)
     const CART_KEY = "tcs_cart_v1";
     function getCartCount(){
       try{
@@ -850,16 +787,12 @@
       }
     }
     document.getElementById("cartBadge").textContent = String(getCartCount());
-
-    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Mobile menu
     const menuBtn = document.getElementById("menuBtn");
     const nav = document.getElementById("nav");
     menuBtn?.addEventListener("click", () => nav.classList.toggle("open"));
 
-    // Dropdown
     document.addEventListener("click", (e) => {
       const ddBtn = e.target.closest('[data-dd="true"]');
       const clickedInsideNav = e.target.closest("nav");
@@ -877,13 +810,11 @@
       }
     });
 
-    // ✅ SITE SEARCH
     const searchInput = document.getElementById("siteSearch");
     const results = document.getElementById("results");
     const resultsList = document.getElementById("resultsList");
 
     const PAGES = [
-      /* ✅ FIX: Home should point to index.html (not "The Candle Studio.html") */
       { title:"Home", url:"index.html", tags:["home","main"] },
       { title:"About", url:"About.html", tags:["about","story"] },
       { title:"Cart", url:"cart.html", tags:["cart","checkout","order"] },
