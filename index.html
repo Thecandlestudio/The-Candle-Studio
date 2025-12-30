@@ -38,6 +38,9 @@
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
+
+      /* ✅ iPhone notch/home-bar safe area */
+      padding-bottom: env(safe-area-inset-bottom);
     }
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--max);margin:0 auto;padding:0 16px}
@@ -54,6 +57,9 @@
       background:rgba(255,255,255,.78);
       backdrop-filter: blur(10px);
       border-bottom:1px solid rgba(52,79,111,.14);
+
+      /* ✅ iPhone notch safe area */
+      padding-top: env(safe-area-inset-top);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
@@ -483,8 +489,12 @@
     .foot a:hover{color:#fff}
     .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
 
+    /* ✅ Sticky bottom bar on phones */
+    .mobile-bar{ display:none; }
+
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 980px){
+      /* existing */
       .welcome{grid-template-columns:1fr}
       .card{grid-column: span 6;}
       .cat-card{grid-column: span 6;}
@@ -508,12 +518,71 @@
       .item.open > .dropdown{display:block}
       .foot{grid-template-columns:1fr}
       .hero h1{font-size:42px}
+
+      /* ✅ Mobile header spacing + easier taps */
+      header .nav{ padding:10px 0; }
+      .brand{ min-width:auto; }
+      .cart-link{ padding:10px 12px; }
+      .menu-btn{ padding:10px 14px; }
+
+      /* ✅ Mobile menu: bigger spacing */
+      nav.open ul{
+        gap:6px;
+        padding:12px;
+      }
+      nav .link{
+        width:100%;
+        justify-content:space-between;
+        padding:12px 14px;
+        font-size:14px;
+      }
+      .dropdown a{
+        padding:12px 12px;
+        font-size:14px;
+      }
+
+      /* ✅ Sticky bottom bar on phones */
+      .mobile-bar{
+        position:fixed;
+        left:12px; right:12px; bottom:12px;
+        display:flex;
+        gap:10px;
+        z-index:100;
+      }
+      .mobile-bar a{
+        flex:1;
+        text-align:center;
+        padding:14px 14px;
+        border-radius:16px;
+        font-weight:900;
+        border:1px solid rgba(52,79,111,.18);
+        background:#fff;
+        box-shadow: 0 14px 30px rgba(52,79,111,.18);
+        color:var(--navy);
+        font-family:'Poppins',sans-serif;
+      }
+      .mobile-bar a.primary{
+        background:var(--navy);
+        color:#fff;
+        border-color:transparent;
+      }
+
+      /* prevent sticky bar from covering footer content */
+      body{ padding-bottom: 88px; }
     }
+
+    /* ✅ Better phone layout + hero sizing */
     @media (max-width: 560px){
-      .card{grid-column: span 6;}
-      .cat-card{grid-column: span 6;}
-      .hero h1{font-size:34px}
-      .hero h2{font-size:16px}
+      .grid{ gap:12px; }
+      .card{ grid-column: span 12; }     /* 1 per row */
+      .cat-card{ grid-column: span 12; } /* 1 per row */
+
+      .hero{ padding:56px 0 34px; }
+      .hero h1{ font-size:32px; }
+      .hero h2{ font-size:15px; }
+
+      /* make hero buttons easier to tap */
+      .btn{ width:100%; max-width:320px; }
     }
   </style>
 </head>
@@ -766,6 +835,12 @@
     </div>
   </footer>
 
+  <!-- ✅ Mobile sticky bar (shows only on mobile via CSS) -->
+  <div class="mobile-bar" aria-label="Quick actions">
+    <a class="primary" href="#featured">Shop</a>
+    <a href="cart.html">Cart</a>
+  </div>
+
   <script>
     // ✅ Cart badge (shared cart localStorage)
     const CART_KEY = "tcs_cart_v1";
@@ -813,7 +888,8 @@
     const resultsList = document.getElementById("resultsList");
 
     const PAGES = [
-      { title:"Home", url:"The Candle Studio.html", tags:["home","main"] },
+      /* ✅ FIX: Home should point to index.html (not "The Candle Studio.html") */
+      { title:"Home", url:"index.html", tags:["home","main"] },
       { title:"About", url:"About.html", tags:["about","story"] },
       { title:"Cart", url:"cart.html", tags:["cart","checkout","order"] },
       { title:"Candle Wax", url:"Candle_wax.html", tags:["wax","candle wax"] },
