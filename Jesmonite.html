@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Candle Studio | Jesmonite</title>
+  <title>The Candle Studio | Jesmonite & Resin Molds</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -60,24 +60,31 @@
       min-width:220px;
     }
  .logo-wrap{
-      width:200px;
-      height:150px;
-      border-radius:50px;
-      background:0;
-      border:0;
-      box-shadow:0;
-      display:flex;
-      align-items:left;
-      justify-content:left;
-      flex:0 0 auto;
-      overflow:hidden;
-    }
-    .logo-img{
-      width:200px;
-      height:150px;
-      object-fit:contain;
-      display:block;
-    }
+  height: 88px;              /* desktop height */
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img{
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
 
 
     .brand-title{
@@ -453,7 +460,6 @@
       .hero h1{font-size:36px}
       .sort{min-width:0; width:100%;}
       .brand{max-width:420px}
-      .logo-wrap{height:56px}
     }
     @media (max-width: 520px){
       .hero h1{font-size:32px}
@@ -467,6 +473,18 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
     }
+
+       
+  header.hide-logo .logo-wrap{
+  opacity: 0;
+  transform: translateY(-12px) scale(.92);
+  pointer-events: none;
+}
+
+.logo-wrap{
+  transition: opacity .25s ease, transform .25s ease;
+}
+
   </style>
 </head>
 
@@ -535,7 +553,7 @@
 
     <div class="cart-body">
       <div class="empty" id="emptyState">
-        Your cart is empty. Click “Add to cart” on a product to start shopping.
+        Your cart is empty. 
       </div>
 
       <div id="cartItems"></div>
@@ -848,6 +866,53 @@
     loadCart();
     renderCart();
     renderProducts();
+ let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      // scrolling down
+      header.classList.add("hide-logo");
+    } else {
+      // scrolling up
+      header.classList.remove("hide-logo");
+    }
+
+    lastScroll = currentScroll;
+  });
+  
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    let lastScroll = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+
+          if (currentScroll > lastScroll && currentScroll > 80) {
+            // scrolling down → hide header
+            header.classList.add("hide-header");
+          } else {
+            // scrolling up → show header
+            header.classList.remove("hide-header");
+          }
+
+          lastScroll = currentScroll;
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    }, { passive: true });
+  });
+
+
+
   </script>
 </body>
 </html>
