@@ -61,20 +61,31 @@
     }
 
     .logo-wrap{
-      height:64px;
-      width:auto;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      overflow:visible;
-      flex:0 0 auto;
-    }
-    .logo-img{
-      height:100%;
-      width:auto;
-      object-fit:contain;
-      display:block;
-    }
+  height: 88px;              /* desktop height */
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img{
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
 
     .brand-title{
       display:block;
@@ -527,7 +538,7 @@
       .hero h1{font-size:36px}
       .sort{min-width:0; width:100%;}
       .brand{max-width:420px}
-      .logo-wrap{height:56px}
+     
     }
     @media (max-width: 520px){
       .hero h1{font-size:32px}
@@ -542,6 +553,19 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
     }
+
+
+       
+  header.hide-logo .logo-wrap{
+  opacity: 0;
+  transform: translateY(-12px) scale(.92);
+  pointer-events: none;
+}
+
+.logo-wrap{
+  transition: opacity .25s ease, transform .25s ease;
+}
+
   </style>
 </head>
 
@@ -899,6 +923,54 @@
 
     loadCart();
     renderCart();
+
+let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      // scrolling down
+      header.classList.add("hide-logo");
+    } else {
+      // scrolling up
+      header.classList.remove("hide-logo");
+    }
+
+    lastScroll = currentScroll;
+  });
+  
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    let lastScroll = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+
+          if (currentScroll > lastScroll && currentScroll > 80) {
+            // scrolling down → hide header
+            header.classList.add("hide-header");
+          } else {
+            // scrolling up → show header
+            header.classList.remove("hide-header");
+          }
+
+          lastScroll = currentScroll;
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    }, { passive: true });
+  });
+
+
+
   </script>
 </body>
 </html>

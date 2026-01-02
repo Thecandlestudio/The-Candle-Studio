@@ -50,6 +50,16 @@
       /* ✅ iPhone notch safe area */
       padding-top: env(safe-area-inset-top);
     }
+
+
+
+    header.hide-logo .logo-wrap{
+  opacity: 0;
+  transform: translateY(-12px) scale(.92);
+  pointer-events: none;
+}
+
+
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
@@ -67,25 +77,31 @@
       max-width:420px;
     }
     .logo-wrap{
-      width:auto;
-      height:64px;
-      border-radius:16px;
-      background:transparent;
-      border:0;
-      box-shadow:none;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      flex:0 0 auto;
-      overflow:visible;
-    }
-    .logo-img{
-      height:64px;
-      width:auto;
-      max-width:220px;
-      object-fit:contain;
-      display:block;
-    }
+  height: 88px;              /* desktop height */
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img{
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
 
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
 
@@ -530,8 +546,6 @@
       .card{grid-column: span 6;}
       .hero h1{font-size:36px}
       .sort{min-width:0; width:100%;}
-      .logo-wrap{height:56px;width:auto}
-      .logo-img{height:56px;width:auto;max-width:200px}
       .brand{max-width:420px}
     }
 
@@ -571,6 +585,10 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
     }
+
+.logo-wrap{
+  transition: opacity .25s ease, transform .25s ease;
+}
   </style>
 </head>
 

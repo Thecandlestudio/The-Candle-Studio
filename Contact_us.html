@@ -71,20 +71,32 @@
       max-width:520px; /* controls how wide logo can be on desktop */
     }
    .logo-wrap{
-      height:64px;
-      width:auto;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      overflow:visible;
-      flex:0 0 auto;
-    }
-    .logo-img{
-      height:100%;
-      width:auto;
-      object-fit:contain;
-      display:block;
-    }
+  height: 88px;              /* desktop height */
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img{
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
+    
 
     .nav-right{display:flex;align-items:center;gap:10px}
     .menu-btn{
@@ -393,7 +405,7 @@
     }
 
     @media (max-width: 980px){
-      .logo-wrap{ height:58px; }
+     }
 
       .search{display:none}
       .menu-btn{display:inline-flex}
@@ -429,9 +441,15 @@
       }
 
       /* ✅ header spacing + wide logo */
-      header .nav{ padding:10px 0; }
-      .brand{ max-width:420px; }
-      .logo-wrap{ height:58px; border-radius:18px; }
+     header.hide-logo .logo-wrap{
+  opacity: 0;
+  transform: translateY(-12px) scale(.92);
+  pointer-events: none;
+}
+
+.logo-wrap{
+  transition: opacity .25s ease, transform .25s ease;
+}
 
       .info-card{grid-column: span 12;}
       .grid2{grid-template-columns:1fr}
@@ -752,7 +770,56 @@
         sendBtn.textContent = "Send Message";
       }
     });
-  </script>
 
+
+let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      // scrolling down
+      header.classList.add("hide-logo");
+    } else {
+      // scrolling up
+      header.classList.remove("hide-logo");
+    }
+
+    lastScroll = currentScroll;
+  });
+  
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    let lastScroll = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+
+          if (currentScroll > lastScroll && currentScroll > 80) {
+            // scrolling down → hide header
+            header.classList.add("hide-header");
+          } else {
+            // scrolling up → show header
+            header.classList.remove("hide-header");
+          }
+
+          lastScroll = currentScroll;
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    }, { passive: true });
+  });
+
+
+
+  </script>
 </body>
 </html>
+
