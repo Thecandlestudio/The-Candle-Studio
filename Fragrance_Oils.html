@@ -46,6 +46,17 @@
       border-bottom:1px solid var(--line);
       padding-top: env(safe-area-inset-top);
     }
+
+    /* Hide header on scroll */
+header{
+  transition: transform .3s ease;
+  will-change: transform;
+}
+
+header.hide-header{
+  transform: translateY(-110%);
+}
+
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
@@ -60,26 +71,33 @@
       flex:1 1 auto;
       max-width:800px;
     }
-   .logo-wrap{
-      height:64px;
-      width:auto;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      flex:0 0 auto;
-      overflow:visible;
-      border-radius:0;
-      background:transparent;
-      border:0;
-      box-shadow:none;
-    }
-    .logo-img{
-      height:64px;
-      width:auto;
-      max-width:180px;
-      object-fit:contain;
-      display:block;
-    }
+  .logo-wrap{
+  height: 88px;              /* desktop height */
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img{
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
+    
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
 
     .pill{
@@ -1146,6 +1164,55 @@
     buildFilters();
     render();
     renderCart();
+
+
+let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      // scrolling down
+      header.classList.add("hide-logo");
+    } else {
+      // scrolling up
+      header.classList.remove("hide-logo");
+    }
+
+    lastScroll = currentScroll;
+  });
+  
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    let lastScroll = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+
+          if (currentScroll > lastScroll && currentScroll > 80) {
+            // scrolling down → hide header
+            header.classList.add("hide-header");
+          } else {
+            // scrolling up → show header
+            header.classList.remove("hide-header");
+          }
+
+          lastScroll = currentScroll;
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    }, { passive: true });
+  });
+
+
+
   </script>
 </body>
 </html>
