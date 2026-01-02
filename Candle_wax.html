@@ -82,25 +82,21 @@
       font-weight:800; color:var(--navy);
       min-width:0;
     }
-    .logo-wrap{
-      width:180px;
-      height:64px;
-      border-radius:16px;
-      background:transparent;
-      border:0;
-      box-shadow:none;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      flex:0 0 auto;
-      overflow:hidden;
-    }
-    .logo-img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-    }
+  .logo-wrap{
+  width:220px;        /* wider */
+  height:84px;        /* taller */
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+}
+
+.logo-img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
     .brand-text{min-width:0}
     .brand-title{
       line-height:1.1;
@@ -548,14 +544,19 @@
       .foot{grid-template-columns: 1fr; gap:14px}
     }
 
-    
-    /* ✅ Logo responsive */
-    @media (max-width: 900px){
-      .logo-wrap{width:160px; height:56px;}
-    }
-    @media (max-width: 560px){
-      .logo-wrap{width:140px; height:52px;}
-    }
+   @media (max-width: 900px){
+  .logo-wrap{
+    width:200px;
+    height:76px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    width:190px;
+    height:72px;
+  }
+}
 
 @media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
