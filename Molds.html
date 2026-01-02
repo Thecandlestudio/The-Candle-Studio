@@ -94,21 +94,21 @@
     }
 
 
-    .logo-wrap{
-      height:64px;
-      width:auto;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      overflow:visible;
-      flex:0 0 auto;
-    }
-    .logo-img{
-      height:100%;
-      width:auto;
-      object-fit:contain;
-      display:block;
-    }
+     .logo-wrap{
+  width: 50%;        /* wider */
+  height:50%;        /* taller */
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+}
+
+.logo-img{
+  width:50%;
+  height:50%;
+  object-fit:contain;
+  display:block;
+}
 
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     .pill{
@@ -622,13 +622,27 @@
 
     /* ✅ Responsive */
     @media (max-width: 900px){
-      .logo-wrap{height:56px}
-
       .hero h1{font-size:36px}
       .cat-card{grid-column: span 6;}
       .card{grid-column: span 6;}
       .control{min-width:240px}
     }
+
+
+
+   @media (max-width: 900px){
+  .logo-wrap{
+    width: 50%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    width:50%;
+    height: 50%;
+  }
+}
     @media (max-width: 520px){
       .hero{padding:38px 0 24px}
       .hero h1{font-size:30px}
