@@ -72,25 +72,6 @@
       min-width:0;
     }
     
-    .logo-wrap{
-      width:200px;
-      height:150px;
-      border-radius:16px;
-      background:0;
-      border:0;
-      box-shadow:0;
-      display:flex;
-      align-items:left;
-      justify-content:left;
-      flex:0 0 auto;
-      overflow:hidden;
-    }
-    .logo-img{
-      width:200px;
-      height:150px;
-      object-fit:contain;
-      display:block;
-    }
     .brand-text{min-width:0}
     .brand-title{
       line-height:1.1;
@@ -617,6 +598,35 @@
     .foot a:hover{color:#fff}
     .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
 
+    
+     /* ===== LOGO (matches uploaded reference) ===== */
+.logo-wrap{
+  height: 88px;              /* desktop height */
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img{
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
+    
     /* ✅ Responsive */
     @media (max-width: 900px){
       .hero h1{font-size:36px}
@@ -646,6 +656,7 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
     }
+
   </style>
 </head>
 
