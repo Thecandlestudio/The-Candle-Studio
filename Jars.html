@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Candle Studio | Jars & Containers</title>
+  <title>The Candle Studio | Jars & Containers </title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -24,95 +24,55 @@
       --max:1100px;
     }
 
- *{box-sizing:border-box}
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family:'Poppins',sans-serif;
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
-    }
 
-    a{text-decoration:none;color:inherit}
+      /* ✅ iPhone home-bar safe area */
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    a{color:inherit;text-decoration:none}
     .container{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-     /* ---------- HEADER ---------- */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
+    /* ---------- HEADER ---------- */
+   header{
+      position:sticky; top:0; z-index:50;
       background:rgba(246,203,204,.75);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
-    }
 
+      /* ✅ iPhone notch safe area */
+      padding-top: env(safe-area-inset-top);
+    }
     .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 0;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 0;
     }
 
-    /* LOGO */
+
+    /* ✅ Logo-only brand (big, wide, modern) */
     .brand{
-      flex:1;
       display:flex;
       align-items:center;
-      max-width:none;
+      gap:0;
+      font-weight:800;
+      color:#fff;
+      min-width:auto;
+      flex:1 1 auto;
+      max-width:520px;
     }
-
     .logo-wrap{
-      height:72px;
-      max-width:280px;
-    }
-
-    .logo-img{
-      height:100%;
-      width:100%;
-      object-fit:contain;
-      display:block;
-    }
-
-    /* ACTIONS */
-    .nav-actions{
+      height:64px;
+      width:auto;
       display:flex;
-      gap:10px;
       align-items:center;
-    }
-
-    .pill{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.8);
-      font-weight:700;
-      font-size:13px;
-      cursor:pointer;
-    }
-
-    /* ---------- RESPONSIVE LOGO ---------- */
-    @media (max-width:900px){
-      .logo-wrap{
-        height:60px;
-        max-width:240px;
-      }
-    }
-
-    @media (max-width:520px){
-      .nav{
-        flex-direction:column;
-        align-items:center;
-      }
-
-      .nav-actions{
-        width:100%;
-        justify-content:center;
-      }
-
-      .logo-wrap{
-        height:48px;
-        max-width:200px;
-      }
+      justify-content:flex-start;
+      overflow:visible;
+      flex:0 0 auto;
     }
     .logo-img{
       height:100%;
@@ -574,21 +534,27 @@
 </head>
 
 <body>
- <header>
-  <div class="container nav">
-    <a class="brand" href="index.html">
-      <span class="logo-wrap">
-        <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
-      </span>
-    </a>
+   <header>
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="logo-wrap" aria-hidden="true">
+          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+        </span>
+      
+      </a>
 
-    <div class="nav-actions">
-      <a class="pill" href="index.html">← Back to Home</a>
-      <button class="pill">🛒 View Cart</button>
+      <div class="nav-actions">
+        <a class="pill" href="index.html">← Back to Home</a>
+
+        <button class="pill" id="openCartBtn" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
+          🛒 View Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
+  <!-- (Optional) Hero is in your CSS but wasn’t in the body before.
+       If you want it visible, keep this block. -->
   <div class="hero">
     <div class="container">
       <h1>Jars & Containers</h1>
@@ -821,7 +787,7 @@
         row.className = "cart-item";
         row.dataset.id = it.id;
 
-        row.innerHTML = `
+        row.innerHTML = 
           <div class="thumb" style="background-image:url('${(it.img||"").replace(/'/g, "\\'")}')"></div>
           <div>
             <div class="ci-top">
@@ -839,7 +805,7 @@
               <button class="remove" type="button" data-action="remove">Remove</button>
             </div>
           </div>
-        `;
+        ;
         cartItemsEl.appendChild(row);
       });
 
