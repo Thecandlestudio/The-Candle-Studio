@@ -24,59 +24,99 @@
       --max:1100px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+ *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family:'Poppins',sans-serif;
       background:var(--bg);
       color:var(--text);
-
-      /* ✅ iPhone home-bar safe area */
-      padding-bottom: env(safe-area-inset-bottom);
     }
-    a{color:inherit;text-decoration:none}
+
+    a{text-decoration:none;color:inherit}
     .container{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    /* ---------- HEADER ---------- */
-   header{
-      position:sticky; top:0; z-index:50;
+     /* ---------- HEADER ---------- */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
       background:rgba(246,203,204,.75);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
-
-      /* ✅ iPhone notch safe area */
-      padding-top: env(safe-area-inset-top);
     }
+
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:12px 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 0;
     }
 
-
-    /* ✅ Logo-only brand (big, wide, modern) */
+    /* LOGO */
     .brand{
+      flex:1;
       display:flex;
       align-items:center;
-      gap:0;
-      font-weight:800;
-      color:#fff;
-      min-width:auto;
-      flex:1 1 auto;
-      max-width:520px;
+      max-width:none;
     }
+
     .logo-wrap{
-      height:64px;
-      width:auto;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      overflow:visible;
-      flex:0 0 auto;
+      height:72px;
+      max-width:280px;
     }
+
     .logo-img{
       height:100%;
       width:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    /* ACTIONS */
+    .nav-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.8);
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+    }
+
+    /* ---------- RESPONSIVE LOGO ---------- */
+    @media (max-width:900px){
+      .logo-wrap{
+        height:60px;
+        max-width:240px;
+      }
+    }
+
+    @media (max-width:520px){
+      .nav{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .nav-actions{
+        width:100%;
+        justify-content:center;
+      }
+
+      .logo-wrap{
+        height:48px;
+        max-width:200px;
+      }
+    }
+    .logo-img{
+      height:100%;
+      width:auto;
       object-fit:contain;
       display:block;
     }
@@ -534,24 +574,20 @@
 </head>
 
 <body>
-   <header>
-    <div class="container nav">
-      <a class="brand" href="index.html" aria-label="Go to home">
-        <span class="logo-wrap" aria-hidden="true">
-          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
-        </span>
-      
-      </a>
+ <header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <span class="logo-wrap">
+        <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+      </span>
+    </a>
 
-      <div class="nav-actions">
-        <a class="pill" href="index.html">← Back to Home</a>
-
-        <button class="pill" id="openCartBtn" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
-          🛒 View Cart <span class="cart-count" id="cartCount">0</span>
-        </button>
-      </div>
+    <div class="nav-actions">
+      <a class="pill" href="index.html">← Back to Home</a>
+      <button class="pill">🛒 View Cart</button>
     </div>
-  </header>
+  </div>
+</header>
 
   <div class="hero">
     <div class="container">
