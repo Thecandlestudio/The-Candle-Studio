@@ -656,6 +656,17 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
     }
+  
+    
+  header.hide-logo .logo-wrap{
+  opacity: 0;
+  transform: translateY(-12px) scale(.92);
+  pointer-events: none;
+}
+
+.logo-wrap{
+  transition: opacity .25s ease, transform .25s ease;
+}
 
   </style>
 </head>
@@ -694,21 +705,7 @@
     <div class="container">
       <div class="titlebar">
         <div>
-          <h2 class="section-title" style="margin-bottom:6px;">Candle Molds</h2>
-          <p class="lead" style="margin:0;">Choose a category to jump to its items.</p>
-
-          <!-- ✅ Mobile quick jump chips -->
-          <div class="jumpbar" aria-label="Jump to category (mobile)">
-            <div class="chiprow">
-              <a class="chip" href="#home-decor">🏠 Home Decor</a>
-              <a class="chip" href="#animal-shaped">🐾 Animals</a>
-              <a class="chip" href="#flowers">🌸 Flowers</a>
-              <a class="chip" href="#religious">✝️ Religious</a>
-              <a class="chip" href="#seasonal">🎄 Seasonal</a>
-              <a class="chip" href="#plexy">🧊 Plexy</a>
-            </div>
-          </div>
-        </div>
+    
 
         <div class="controls" aria-label="Sort and search controls">
           <div class="control" title="Sort items">
@@ -1568,6 +1565,24 @@
     loadCart();
     renderCart();
     applySearchAndSort();
+
+  let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      // scrolling down
+      header.classList.add("hide-logo");
+    } else {
+      // scrolling up
+      header.classList.remove("hide-logo");
+    }
+
+    lastScroll = currentScroll;
+  });
+
   </script>
 </body>
 </html>
