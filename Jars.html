@@ -48,6 +48,17 @@
       /* ✅ iPhone notch safe area */
       padding-top: env(safe-area-inset-top);
     }
+
+
+      header.hide-logo .logo-wrap{
+  opacity: 0;
+  transform: translateY(-12px) scale(.92);
+  pointer-events: none;
+}
+
+.logo-wrap{
+  transition: opacity .25s ease, transform .25s ease;
+}
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
@@ -56,26 +67,46 @@
 
     /* ✅ Logo-only brand (big, wide, modern) */
     .brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
-  color:var(--navy);
-}
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; color:var(--navy);
+      letter-spacing:.2px;
+      min-width:220px;
+      min-height:44px; /* ✅ better tap target */
+    }
     .logo-wrap{
-  width:200px;
-  height:150px;
-  border-radius:16px;
-  display:flex;
-  overflow:hidden;
+  height: 88px;              /* desktop height */
+  width: auto;
+  display: flex;
+  align-items: center;
 }
 
 .logo-img{
-  width:200px;
-  height:150px;
-  object-fit:contain;
-  display:block;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
+
+/* Tablet */
+@media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
+    .brand small{
+      display:block;
+      font-size:12px;
+      font-weight:700;
+      color:rgba(52,79,111,.7);
+      margin-top:2px;
+    }
+
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .pill{
       padding:9px 12px;
@@ -533,7 +564,7 @@
     <div class="container nav">
      <a class="brand" href="index.html" aria-label="Go to home">
   <span class="logo-wrap" aria-hidden="true">
-    <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+    <img src="logo.png" alt="TheCandleStudiologo" class="logo-img">
   </span>
 </a>
 
@@ -901,6 +932,54 @@
 
     loadCart();
     renderCart();
+
+let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      // scrolling down
+      header.classList.add("hide-logo");
+    } else {
+      // scrolling up
+      header.classList.remove("hide-logo");
+    }
+
+    lastScroll = currentScroll;
+  });
+  
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    let lastScroll = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+
+          if (currentScroll > lastScroll && currentScroll > 80) {
+            // scrolling down → hide header
+            header.classList.add("hide-header");
+          } else {
+            // scrolling up → show header
+            header.classList.remove("hide-header");
+          }
+
+          lastScroll = currentScroll;
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    }, { passive: true });
+  });
+
+
+
   </script>
 </body>
 </html>
