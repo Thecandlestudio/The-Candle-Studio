@@ -87,25 +87,7 @@
   display: block;
 }
 
-/* Tablet */
-@media (max-width: 900px){
-  .logo-wrap{
-    height: 200px;
-  }
-}
 
-@media (max-width: 560px){
-  .logo-wrap{
-    height: 200px;   /* bigger mobile logo */
-  }
-}
-    .brand small{
-      display:block;
-      font-size:12px;
-      font-weight:700;
-      color:rgba(52,79,111,.7);
-      margin-top:2px;
-    }
 
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .pill{
@@ -541,7 +523,6 @@
       .hero h1{font-size:36px}
       .sort{min-width:0; width:100%;}
       .brand{max-width:420px}
-      .logo-wrap{height:56px}
     }
     @media (max-width: 520px){
       .hero h1{font-size:32px}
@@ -551,6 +532,25 @@
       .card{grid-column: span 12;}
       .btn{width:100%; justify-content:center;} /* ✅ easier tap */
       .pill{padding:10px 12px}
+    }
+
+    @media (max-width: 900px){
+  .logo-wrap{
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    height: 200px;   /* bigger mobile logo */
+  }
+}
+    .brand small{
+      display:block;
+      font-size:12px;
+      font-weight:700;
+      color:rgba(52,79,111,.7);
+      margin-top:2px;
     }
 
     @media (prefers-reduced-motion: reduce){
