@@ -62,6 +62,14 @@
       border-bottom:1px solid var(--line);
       padding-top: env(safe-area-inset-top); /* ✅ iPhone notch */
     }
+
+    header{
+  transition: transform .28s ease;
+}
+
+header.hide-header{
+  transform: translateY(-100%);
+}
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
@@ -696,7 +704,7 @@
   <div class="hero">
     <div class="container">
       <h1>The Candle Studio</h1>
-      <p>Browse candle molds by category. Use search + sorting, then click a category to jump to its items (all on one page).</p>
+      <p>Browse candle molds by category. </p>
     </div>
   </div>
 
@@ -709,7 +717,7 @@
 
         <div class="controls" aria-label="Sort and search controls">
           <div class="control" title="Sort items">
-            <small>Sorted by feature</small>
+            <small>Sort by</small>
             <select id="sortSelect" aria-label="Sorted by feature">
               <option value="feature" selected>Feature (default)</option>
               <option value="title-az">Title (A → Z)</option>
@@ -1582,6 +1590,27 @@
 
     lastScroll = currentScroll;
   });
+  let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      // scrolling down → hide header
+      header.classList.add("hide-header");
+    } else {
+      // scrolling up → show header
+      header.classList.remove("hide-header");
+    }
+
+    lastScroll = currentScroll;
+  });
+
+
+
+
+
 
   </script>
 </body>
