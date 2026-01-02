@@ -56,31 +56,26 @@
 
     /* ✅ Logo-only brand (big, wide, modern) */
     .brand{
-      display:flex;
-      align-items:center;
-      gap:0;
-      font-weight:800;
-      color:#fff;
-      min-width:auto;
-      flex:1 1 auto;
-      max-width:520px;
-    }
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  color:var(--navy);
+}
     .logo-wrap{
-      height:64px;
-      width:auto;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      overflow:visible;
-      flex:0 0 auto;
-    }
-    .logo-img{
-      height:100%;
-      width:auto;
-      object-fit:contain;
-      display:block;
-    }
+  width:200px;
+  height:150px;
+  border-radius:16px;
+  display:flex;
+  overflow:hidden;
+}
 
+.logo-img{
+  width:200px;
+  height:150px;
+  object-fit:contain;
+  display:block;
+}
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .pill{
       padding:9px 12px;
@@ -536,12 +531,11 @@
 <body>
    <header>
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="Go to home">
-        <span class="logo-wrap" aria-hidden="true">
-          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
-        </span>
-      
-      </a>
+     <a class="brand" href="index.html" aria-label="Go to home">
+  <span class="logo-wrap" aria-hidden="true">
+    <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
+  </span>
+</a>
 
       <div class="nav-actions">
         <a class="pill" href="index.html">← Back to Home</a>
