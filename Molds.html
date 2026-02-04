@@ -62,16 +62,6 @@
       border-bottom:1px solid var(--line);
       padding-top: env(safe-area-inset-top); /* ✅ iPhone notch */
     }
-/* Hide header on scroll */
-header{
-  transition: transform .3s ease;
-  will-change: transform;
-}
-
-header.hide-header{
-  transform: translateY(-110%);
-}
-
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0;
@@ -81,7 +71,12 @@ header.hide-header{
       font-weight:800; color:var(--navy);
       min-width:0;
     }
-    
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background:linear-gradient(135deg,var(--rose),var(--lav));
+      box-shadow:0 10px 22px rgba(151,73,90,.22);
+      flex:0 0 auto;
+    }
     .brand-text{min-width:0}
     .brand-title{
       line-height:1.1;
@@ -97,6 +92,23 @@ header.hide-header{
       overflow:hidden;
       text-overflow:ellipsis;
     }
+
+
+     .logo-wrap{
+  width: 50%;        /* wider */
+  height:50%;        /* taller */
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+}
+
+.logo-img{
+  width:50%;
+  height:50%;
+  object-fit:contain;
+  display:block;
+}
 
     .nav-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     .pill{
@@ -608,35 +620,6 @@ header.hide-header{
     .foot a:hover{color:#fff}
     .copy{margin-top:16px;color:rgba(255,255,255,.70);font-size:13px;font-weight:700;font-family:'Poppins',sans-serif}
 
-    
-     /* ===== LOGO (matches uploaded reference) ===== */
-.logo-wrap{
-  height: 88px;              /* desktop height */
-  width: auto;
-  display: flex;
-  align-items: center;
-}
-
-.logo-img{
-  height: 100%;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-
-/* Tablet */
-@media (max-width: 900px){
-  .logo-wrap{
-    height: 200px;
-  }
-}
-
-@media (max-width: 560px){
-  .logo-wrap{
-    height: 200px;   /* bigger mobile logo */
-  }
-}
-    
     /* ✅ Responsive */
     @media (max-width: 900px){
       .hero h1{font-size:36px}
@@ -644,6 +627,22 @@ header.hide-header{
       .card{grid-column: span 6;}
       .control{min-width:240px}
     }
+
+
+
+   @media (max-width: 900px){
+  .logo-wrap{
+    width: 50%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 560px){
+  .logo-wrap{
+    width:50%;
+    height: 50%;
+  }
+}
     @media (max-width: 520px){
       .hero{padding:38px 0 24px}
       .hero h1{font-size:30px}
@@ -666,33 +665,16 @@ header.hide-header{
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important; scroll-behavior:auto !important;}
     }
-  
-    
-  header.hide-logo .logo-wrap{
-  opacity: 0;
-  transform: translateY(-12px) scale(.92);
-  pointer-events: none;
-}
-
-.logo-wrap{
-  transition: opacity .25s ease, transform .25s ease;
-}
-
   </style>
 </head>
 
 <body>
   <header>
-  <div class="container nav">
+    <div class="container nav">
       <a class="brand" href="index.html" aria-label="Go to home">
-        <span class="logo-wrap" aria-hidden="true">
-          <img src="logo.png" alt="The Candle Studio Logo" class="logo-img">
-        </span>
-      </a> 
-      </div>
-      </header>
-
-
+        <span class="logo-wrap" aria-hidden="true"><img class="logo-img" src="logo.png" alt="The Candle Studio logo"></span>
+      
+      </a>
       <div class="nav-actions">
         <a class="pill" href="index.html">← Back to Home</a>
 
@@ -706,7 +688,7 @@ header.hide-header{
   <div class="hero">
     <div class="container">
       <h1>The Candle Studio</h1>
-      <p>Browse candle molds by category. </p>
+      <p>Browse candle molds by category. Use search + sorting, then click a category to jump to its items (all on one page).</p>
     </div>
   </div>
 
@@ -715,11 +697,26 @@ header.hide-header{
     <div class="container">
       <div class="titlebar">
         <div>
-    
+          <h2 class="section-title" style="margin-bottom:6px;">Candle Molds</h2>
+          <p class="lead" style="margin:0;">Choose a category to jump to its items.</p>
+
+          <!-- ✅ Mobile quick jump chips -->
+          <div class="jumpbar" aria-label="Jump to category (mobile)">
+            <div class="chiprow">
+              <a class="chip" href="#home-decor">🏠 Home Decor</a>
+               <a class="chip" href="#ramadan">🌙 Ramadan Collection</a>
+              <a class="chip" href="#animal-shaped">🐾 Animals</a>
+              <a class="chip" href="#flowers">🌸 Flowers</a>
+              <a class="chip" href="#religious">✝️ Religious</a>
+              <a class="chip" href="#seasonal">🎄 Seasonal</a>
+              <a class="chip" href="#plexy">🧊 Plexy</a>
+            </div>
+          </div>
+        </div>
 
         <div class="controls" aria-label="Sort and search controls">
           <div class="control" title="Sort items">
-            <small>Sort by</small>
+            <small>Sorted by feature</small>
             <select id="sortSelect" aria-label="Sorted by feature">
               <option value="feature" selected>Feature (default)</option>
               <option value="title-az">Title (A → Z)</option>
@@ -741,6 +738,33 @@ header.hide-header{
       <div class="resultline" id="resultLine">Showing all items.</div>
 
       <div class="cat-grid">
+       
+       
+        <a class="cat-card" href="#Valentine">
+          <div class="cat-media">
+            <img src="valentinesday.png" alt="Valentine's Day Collection">
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">❤️</div>
+            <h3 class="cat-name">Valentine's Day Collection</h3>
+            <p class="cat-desc">Cosy Romantic candles</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+
+         <a class="cat-card" href="#ramadan">
+          <div class="cat-media">
+            <img src="ramadancover.png" alt="Ramadan Collection">
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">🌙</div>
+            <h3 class="cat-name">Ramadan Collection</h3>
+            <p class="cat-desc">Cosy ramadan candles</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+       
+       
         <a class="cat-card" href="#home-decor">
           <div class="cat-media">
             <img src="homedeco2.png" alt="Home Decor Molds">
@@ -749,6 +773,19 @@ header.hide-header{
             <div class="cat-icon">🏠</div>
             <h3 class="cat-name">Home Decor Molds</h3>
             <p class="cat-desc">Modern shapes and statement pieces.</p>
+            <span class="cat-cta">Jump to items →</span>
+          </div>
+        </a>
+
+
+         <a class="cat-card" href="#food">
+          <div class="cat-media">
+            <img src="fruits.png" alt="Food Inspired Molds">
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon">🧁</div>
+            <h3 class="cat-name">Food Inspired Molds</h3>
+            <p class="cat-desc">Yummy foods candles!</p>
             <span class="cat-cta">Jump to items →</span>
           </div>
         </a>
@@ -816,6 +853,133 @@ header.hide-header{
     </div>
   </section>
 
+
+  <!-- =======================
+       VALENTINE'S DAY MOLDS
+  ======================== -->
+  <section id="Valentine" data-section="Valentine's Day Molds">
+    <div class="container">
+      <h2 class="section-title">Valentine's Day Molds</h2>
+      <p class="lead">A special romantic gift to your loved ones! Be creative!</p>
+
+      <div class="grid" data-grid="food">
+        <article class="card" data-name="flower heart" data-price="5.00" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="flwrhrt.png" alt="flower heart"></div>
+          <div class="content"><h3 class="name">Flower Heart</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="flower-heart" data-name="flower heart" data-price="5.00" data-img="flwrhrt.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Different Heart Sizes" data-price="5.00" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="diffhrtshap.png" alt="Different Heart Size"></div>
+          <div class="content"><h3 class="name">Different Heart Size</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Different-Heart-Size" data-name="Different Heart Size" data-price="5.00" data-img="diffhrtshap.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Mesh Heart" data-price="8.00" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="meshhrt.png" alt="Mesh Heart"></div>
+          <div class="content"><h3 class="name">Mesh Heart</h3><div class="meta"><div class="price">$8.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Mesh-Heart" data-name="Mesh Heart" data-price="8.00" data-img="meshhrt.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="12 Hearts Mold" data-price="5.00" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="12hrts.png" alt="12 Hearts Mold"></div>
+          <div class="content"><h3 class="name">12 Hearts Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="12-Hearts-Mold" data-name="12 Hearts Mold" data-price="5.00" data-img="12hrts.png.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       RAMADAN COLLECTION ITEMS
+  ======================== -->
+  <section id="ramadan" data-section="Ramadan Collection">
+    <div class="container">
+      <h2 class="section-title">Ramadan Collection</h2>
+      <p class="lead">Cosey candles for Ramadan holly month, decorate your house with our new collection</p>
+
+      <div class="grid" data-grid="ramadan">
+        <article class="card" data-name="Ramadan Moon" data-price="11.00" data-soldout="false" data-section="Ramadan Collection">
+          <div class="img"><img src="rammoon.png" alt="Ramadan Moon"></div>
+          <div class="content"><h3 class="name">Ramadan Moon</h3><div class="meta"><div class="price">$11.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Ramadan-Moon" data-name="Ramadan Moon" data-price="11.00" data-img="rammoon.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Ramadan Star" data-price="11.00" data-soldout="false" data-section="Ramadan Collection">
+          <div class="img"><img src="ramstar.png" alt="Ramadan Star"></div>
+          <div class="content"><h3 class="name">Ramadan Star</h3><div class="meta"><div class="price">$11.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Ramadan-Star" data-name="Ramadan Star" data-price="11.00" data-img="ramstar.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Small Moons" data-price="6.00" data-soldout="false" data-section="Ramadan Collection">
+          <div class="img"><img src="smallmoon.png" alt="Small Moons"></div>
+          <div class="content"><h3 class="name">Small Moons</h3><div class="meta"><div class="price">$6.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Small-Moons" data-name="Small Moons" data-price="6.00" data-img="smallmoon.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Ramadan Frame" data-price="12.00" data-soldout="false" data-section="Ramadan Collection">
+          <div class="img"><img src="ramdanframe.png" alt="Ramadan Frame"></div>
+          <div class="content"><h3 class="name">Ramadan Frame</h3><div class="meta"><div class="price">$12.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Ramadan-frame" data-name="Ramadan Frame" data-price="12.00" data-img="ramdanframe.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Ramadan Mosque" data-price="12.00" data-soldout="false" data-section="Ramadan Collection">
+          <div class="img"><img src="mosq.png" alt="Ramadan Mosque"></div>
+          <div class="content"><h3 class="name">Ramadan Mosque</h3><div class="meta"><div class="price">$12.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Ramadan-Mosque" data-name="Ramadan Mosque" data-price="12.00" data-img="mosq.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Ramadan Flower Moon" data-price="14.00" data-soldout="false" data-section="Ramadan Collection">
+          <div class="img"><img src="ramflow.png" alt="Ramadan Flower Moon"></div>
+          <div class="content"><h3 class="name">Ramadan Flower Moon</h3><div class="meta"><div class="price">$14.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Ramadan-Flower-Moon" data-name="Ramadan Flower Moon" data-price="14.00" data-img="ramflow.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =======================
+       FOOD INSPIRED MOLDS
+  ======================== -->
+  <section id="Food" data-section="Food Inspired Molds">
+    <div class="container">
+      <h2 class="section-title">Food Inspired Molds</h2>
+      <p class="lead">Cute fruits to make your own mocha, smoothie, or cocktail candle cup! Be creative!</p>
+
+      <div class="grid" data-grid="food">
+        <article class="card" data-name="Strawberry Mold" data-price="3.50" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="strawberry.png" alt="Strawberry Mold"></div>
+          <div class="content"><h3 class="name">Strawberry Mold</h3><div class="meta"><div class="price">$3.50</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Strawberry-Mold" data-name="Strawberry Mold" data-price="3.50" data-img="strawberry.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Raspberry Mold" data-price="3.50" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="raspberry.png" alt="Raspberry Mold"></div>
+          <div class="content"><h3 class="name">Raspberry Mold</h3><div class="meta"><div class="price">$3.50</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Raspberry-Mold" data-name="Raspberry Mold" data-price="3.50" data-img="raspberry.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Blueberry Mold" data-price="3.50" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="bluebrry.png" alt="Blueberry Mold"></div>
+          <div class="content"><h3 class="name">Blueberry Mold</h3><div class="meta"><div class="price">$3.50</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Blueberry-Mold" data-name="Blueberry Mold" data-price="3.50" data-img="bluebrry.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Tangarine Mold" data-price="3.50" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="tangarine.png" alt="Tangarine Mold"></div>
+          <div class="content"><h3 class="name">Tangarine Mold</h3><div class="meta"><div class="price">$3.50</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Tangarine-Mold" data-name="Tangarine Mold" data-price="3.50" data-img="tangarine.png">Add to cart</button></div>
+        </article>
+
+        <article class="card" data-name="Coffee Beans Mold" data-price="5" data-soldout="false" data-section="Food Inspired Molds">
+          <div class="img"><img src="coff.png" alt="Coffee Beans Mold"></div>
+          <div class="content"><h3 class="name">Coffee Beans Mold</h3><div class="meta"><div class="price">$5.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Coffee-Beans-Mold" data-name="Coffee Beans Mold" data-price="5.00" data-img="coff.png">Add to cart</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
   <!-- =======================
        HOME DECOR ITEMS
   ======================== -->
@@ -919,6 +1083,12 @@ header.hide-header{
           <div class="img"><img src="15bub.png" alt="15 cavity Bubble Candle Mold"></div>
           <div class="content"><h3 class="name">15 cavity Bubble Candle Mold</h3><div class="meta"><div class="price">$7.00</div></div></div>
           <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="15-cavity-bubble" data-name="15 cavity Bubble Candle Mold" data-price="7.00" data-img="15bub.png">Add to cart</button></div>
+        </article>
+
+         <article class="card" data-name="Letters and Numbers Mold" data-price="6" data-soldout="false" data-section="Home Decor Molds">
+          <div class="img"><img src="abc.png" alt="Letters and Numbers Mold"></div>
+          <div class="content"><h3 class="name">Letters and Numbers Mold</h3><div class="meta"><div class="price">$6.00</div></div></div>
+          <div class="btnrow"><button class="btn add-to-cart" type="button" data-id="Letters-and-Numbers-Mold" data-name="15 cavity Bubble Candle Mold" data-price="6.00" data-img="abc.png">Add to cart</button></div>
         </article>
 
         <article class="card" data-name="Mini YSL Logo" data-price="8" data-soldout="false" data-section="Home Decor Molds">
@@ -1223,9 +1393,8 @@ header.hide-header{
     <div class="container">
       <div class="foot">
         <div>
-         
-    
-            <span>
+          <div class="brand" style="margin-bottom:8px">
+      
               <span style="display:block;font-size:15px;line-height:1.1;font-weight:700;">
                 The Candle Studio
               </span>
@@ -1298,6 +1467,18 @@ header.hide-header{
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Logo fallback: try common filename/case variants if the logo doesn't load (GitHub Pages is case-sensitive)
+    (function(){
+      const img = document.querySelector(".logo-img");
+      if(!img) return;
+      const candidates = ["logo.png","Logo.png","logo.PNG","Logo.PNG","logo.jpg","Logo.jpg","logo.jpeg","Logo.jpeg","logo.webp","Logo.webp"];
+      let i = 0;
+      img.addEventListener("error", () => {
+        i += 1;
+        if(i < candidates.length) img.src = candidates[i];
+      });
+    })();
 
     // -----------------------
     // Simple Cart (localStorage)
@@ -1575,54 +1756,6 @@ header.hide-header{
     loadCart();
     renderCart();
     applySearchAndSort();
-
-  let lastScroll = 0;
-  const header = document.querySelector("header");
-
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll > lastScroll && currentScroll > 80) {
-      // scrolling down
-      header.classList.add("hide-logo");
-    } else {
-      // scrolling up
-      header.classList.remove("hide-logo");
-    }
-
-    lastScroll = currentScroll;
-  });
-  
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector("header");
-    let lastScroll = window.scrollY;
-    let ticking = false;
-
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScroll = window.scrollY;
-
-          if (currentScroll > lastScroll && currentScroll > 80) {
-            // scrolling down → hide header
-            header.classList.add("hide-header");
-          } else {
-            // scrolling up → show header
-            header.classList.remove("hide-header");
-          }
-
-          lastScroll = currentScroll;
-          ticking = false;
-        });
-
-        ticking = true;
-      }
-    }, { passive: true });
-  });
-
-
-
   </script>
 </body>
 </html>
